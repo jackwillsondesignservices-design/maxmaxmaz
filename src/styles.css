@@ -426,6 +426,7 @@
     will-change: transform;
   }
   .js &[data-loaded="false"] img {
+    animation: image-failsafe 800ms 3s forwards;
     opacity: 0;
     transform: scale(1.12);
   }
@@ -517,6 +518,7 @@
     transform 1600ms var(--ease-cinematic);
   .js [data-loaded="false"] > & {
     opacity: 0;
+    animation: image-failsafe 800ms 3s forwards;
   }
   [data-inview="false"] > &:not([data-parallax]) {
     transform: scale(1.08);
@@ -551,6 +553,14 @@
   margin: -0.06em -0.14em -0.26em;
   animation: word-rise 1400ms var(--ease-cinematic) both;
   animation-delay: var(--rise-delay, 0ms);
+}
+
+/* Safety net: a photo is never left hidden, even if its load signal is missed */
+@keyframes image-failsafe {
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes word-rise {

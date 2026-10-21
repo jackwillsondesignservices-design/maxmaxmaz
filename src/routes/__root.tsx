@@ -92,9 +92,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     scripts: [
       {
-        // Marks JS as available (so images can fade in) and holds entrance motion until the display face is ready.
+        // Marks JS as available (so images can fade in), reveals every photo the moment it loads — independently of React,
+        // so a slow or failed app script can never leave pictures hidden — and holds entrance motion until fonts are ready.
         children:
-          "(function(){var d=document.documentElement;d.classList.add('js','fonts-pending');var done=function(){d.classList.remove('fonts-pending')};if(document.fonts&&document.fonts.ready){Promise.race([document.fonts.ready,new Promise(function(r){setTimeout(r,1200)})]).then(done)}else{done()}})();",
+          "(function(){var d=document.documentElement;d.classList.add('js','fonts-pending');var mark=function(e){var t=e.target;if(t&&t.tagName==='IMG'){var w=t.closest('[data-loaded]');if(w)w.setAttribute('data-loaded','true')}};document.addEventListener('load',mark,true);document.addEventListener('error',mark,true);var done=function(){d.classList.remove('fonts-pending')};if(document.fonts&&document.fonts.ready){Promise.race([document.fonts.ready,new Promise(function(r){setTimeout(r,1200)})]).then(done)}else{done()}})();",
       },
     ],
   }),
