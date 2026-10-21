@@ -42,12 +42,18 @@ export function ContactForm() {
 
     inFlight.current = true;
     setStatus("submitting");
-    // Loaded on demand so the database client never weighs down page loads.
-    const { supabase } = await import("@/integrations/supabase/client");
-    const { error } = await supabase.from("enquiries").insert(result.data);
+    let failed = false;
+    try {
+      // Loaded on demand so the database client never weighs down page loads.
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { error } = await supabase.from("enquiries").insert(result.data);
+      failed = Boolean(error);
+    } catch {
+      failed = true;
+    }
     inFlight.current = false;
 
-    if (error) {
+    if (failed) {
       setStatus("error");
     } else {
       setStatus("success");
