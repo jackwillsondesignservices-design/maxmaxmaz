@@ -236,3 +236,29 @@ export const images = {
     "50% 50%",
   ),
 } as const;
+
+/** Opening photograph of each page — warmed on link hover so pages arrive fully formed. */
+export const pageHeroImages: Record<string, SiteImage> = {
+  "/": heroDev,
+  "/property-investment-development": heroDev,
+  "/home-security": heroBlue,
+  "/energy-saving": heroSol,
+  "/sustainable-housing": heroLand,
+  "/about": heroTim,
+  "/contact": heroRet,
+};
+
+const warmed = new Set<string>();
+/** Start downloading a page's opening photograph ahead of navigation (browser only, once per page). */
+export function warmPageImage(path: string) {
+  if (typeof window === "undefined" || warmed.has(path)) return;
+  const img = pageHeroImages[path];
+  if (!img) return;
+  warmed.add(path);
+  const pre = new Image();
+  if (img.srcSet) {
+    pre.sizes = "100vw";
+    pre.srcset = img.srcSet;
+  }
+  pre.src = img.src;
+}
