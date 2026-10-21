@@ -28,16 +28,25 @@ function preload(src: string, srcSet?: string) {
 /**
  * Automatic architectural hero slider — no visible controls.
  * Six frames, 2s each, ~750ms crossfade with a subtle settle-in scale.
- * Only the first frame loads up front; each next frame is prepared before it is shown.
+ * The first frame opens from its own blurred preview; the schedule starts once it is sharp.
+ * Each next frame is fully decoded before it is shown, so nothing ever flashes in half-loaded.
  */
 export function HeroSlider({ className }: { className?: string }) {
   const [active, setActive] = useState(0);
   const [leaving, setLeaving] = useState<number | null>(null);
   const [ready, setReady] = useState<Set<number>>(() => new Set([0]));
+  const [firstLoaded, setFirstLoaded] = useState(false);
   const [cycle, setCycle] = useState(0);
   const readyRef = useRef(ready);
   const activeRef = useRef(0);
+  const firstImgRef = useRef<HTMLImageElement | null>(null);
   readyRef.current = ready;
+
+  // The first image may finish before hydration.
+  useEffect(() => {
+    const img = firstImgRef.current;
+    if (img?.complete && img.naturalWidth > 0) setFirstLoaded(true);
+  }, []);
 
   const prepare = useCallback((index: number) => {
     if (readyRef.current.has(index)) return Promise.resolve();
@@ -55,13 +64,14 @@ export function HeroSlider({ className }: { className?: string }) {
   }, []);
 
   useEffect(() => {
+    if (!firstLoaded) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let timer: ReturnType<typeof setTimeout> | undefined;
     let cancelled = false;
 
     // Warm the second frame once the first paint has settled.
-    const warm = window.setTimeout(() => void prepare(1), 250);
+    const warm = window.setTimeout(() => void prepare(1), 150);
 
     const tick = () => {
       if (cancelled) return;
@@ -90,7 +100,7 @@ export function HeroSlider({ className }: { className?: string }) {
       if (timer) clearTimeout(timer);
       window.clearTimeout(warm);
     };
-  }, [prepare]);
+  }, [prepare, firstLoaded]);
 
   // Drop the outgoing layer once the crossfade has completed.
   useEffect(() => {
@@ -99,8 +109,18 @@ export function HeroSlider({ className }: { className?: string }) {
     return () => clearTimeout(t);
   }, [leaving, cycle]);
 
+  const first = heroFrames[0];
+
   return (
     <div className={cn("absolute inset-0 overflow-hidden bg-forest", className)}>
+      {/* Blurred preview of the first frame — visible instantly, before any photograph downloads */}
+      {first?.lqip && (
+        <div
+          aria-hidden="true"
+          className="absolute -inset-[6%] bg-cover blur-2xl"
+          style={{ backgroundImage: `url("${first.lqip}")`, backgroundPosition: first.position }}
+        />
+      )}
       {heroFrames.map((frame, i) => {
         if (!ready.has(i)) return null;
         const isActive = i === active;
@@ -110,9 +130,11 @@ export function HeroSlider({ className }: { className?: string }) {
             className="hero-frame"
             data-active={isActive}
             data-leaving={i === leaving && !isActive}
+            data-loaded={i === 0 ? firstLoaded : true}
             aria-hidden={!isActive}
           >
             <img
+              ref={i === 0 ? firstImgRef : undefined}
               src={frame.src}
               srcSet={frame.srcSet}
               sizes="100vw"
@@ -122,6 +144,8 @@ export function HeroSlider({ className }: { className?: string }) {
               loading="eager"
               fetchPriority={i === 0 ? "high" : "low"}
               decoding={i === 0 ? "sync" : "async"}
+              onLoad={i === 0 ? () => setFirstLoaded(true) : undefined}
+              onError={i === 0 ? () => setFirstLoaded(true) : undefined}
               className="img-cover hero-img"
               style={{ "--pos": frame.position, "--pos-m": frame.mobilePosition } as CSSProperties}
             />
@@ -129,8 +153,9 @@ export function HeroSlider({ className }: { className?: string }) {
         );
       })}
       <div className="absolute inset-0 z-[3] scrim-hero" />
+      <div className="absolute inset-0 z-[3] scrim-vignette" />
       <div className="absolute bottom-0 left-0 right-0 z-[4] h-px bg-rule-dark" aria-hidden="true">
-        <div key={cycle} className="hero-progress h-px bg-copper" />
+        {firstLoaded && <div key={cycle} className="hero-progress h-px bg-copper" />}
       </div>
     </div>
   );

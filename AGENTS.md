@@ -17,3 +17,6 @@
 - Colours, type scale, link styles and motion are design-system utilities in `src/styles.css`; components use those tokens, never raw colour values.
 - Contact enquiries insert into the `enquiries` table (anon INSERT only, no read policy) with validation shared in `src/lib/enquiry.ts`, so the client and tests use the same rules.
 - The home hero slider must keep: 2s per slide, no visible controls, only the first frame loaded eagerly, next frame preloaded before it is shown, and no auto-advance under reduced motion.
+- Every photograph renders through `EditorialImage`, `PageHero` or `HeroSlider`, which show the image's `tone` and blurred `lqip` (from `src/lib/placeholders.ts`) until the full file is decoded; when adding an image, generate its placeholder entry too so nothing ever pops in.
+- Motion lives in three shared places: `SmoothScroll` (Lenis, paused during navigation, off under reduced motion), router-level View Transitions + intent preloading in `src/router.tsx`, and `SplitWords` for display headlines — reuse them rather than adding per-page animation code.
+- Hero/page-hero headlines use `text-luminous` + `SplitWords` so the lettering takes its light from the photograph; keep headline titles as plain strings for that reason.

@@ -72,6 +72,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   --ease-architectural: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
@@ -148,6 +149,13 @@
   --gradient-scrim: linear-gradient(0deg, oklch(0.18 0.02 164 / 85%) 0%, oklch(0.18 0.02 164 / 20%) 60%, oklch(0.18 0.02 164 / 35%) 100%);
   --gradient-cta: linear-gradient(90deg, oklch(0.2 0.02 164 / 88%) 0%, oklch(0.2 0.02 164 / 55%) 55%, oklch(0.2 0.02 164 / 25%) 100%);
 
+  --gradient-vignette: radial-gradient(130% 95% at 50% 38%, oklch(0.18 0.02 164 / 0%) 55%, oklch(0.16 0.02 164 / 55%) 100%);
+  /* Display lettering lit like the photographs: cool limestone at the cap height, warm evening light at the baseline */
+  --gradient-luminous: linear-gradient(180deg, oklch(0.985 0.008 90) 0%, oklch(0.965 0.014 86) 45%, oklch(0.9 0.035 74) 100%);
+  --gradient-luminous-warm: linear-gradient(180deg, oklch(0.975 0.014 84) 0%, oklch(0.94 0.026 78) 45%, oklch(0.86 0.05 66) 100%);
+  --shadow-letter: drop-shadow(0 0.04em 0.35em oklch(0.16 0.02 164 / 45%));
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
   --duration-fade: 750ms;
 }
 
@@ -165,7 +173,9 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
+    font-feature-settings: "kern", "liga", "calt";
+    font-kerning: normal;
+    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -188,6 +198,39 @@
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.01em;
+    text-wrap: balance;
+    font-kerning: normal;
+    font-synthesis: none;
+  }
+
+  h1 em,
+  h2 em,
+  h3 em {
+    font-style: italic;
+    letter-spacing: -0.005em;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+    hanging-punctuation: first;
+  }
+
+  img {
+    -webkit-user-drag: none;
+  }
+
+  /* Film grain over the whole site — barely there, gives photographs and flat grounds one surface */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    background-image: var(--grain);
+    background-size: 160px;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
   }
 }
 
@@ -210,49 +253,53 @@
 /* ---------- Typography ---------- */
 @utility display-hero {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 7.6vw, 8.5rem);
-  line-height: 0.94;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.9rem, 7.8vw, 8.75rem);
+  line-height: 0.9;
+  letter-spacing: -0.032em;
 }
 
 @utility display-1 {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6.4vw, 6.25rem);
-  line-height: 0.98;
-  letter-spacing: -0.018em;
+  font-size: clamp(2.6rem, 6.2vw, 6.25rem);
+  line-height: 0.96;
+  letter-spacing: -0.026em;
 }
 
 @utility display-2 {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.6vw, 4.5rem);
-  line-height: 1.02;
-  letter-spacing: -0.015em;
+  font-size: clamp(2.1rem, 4.4vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.022em;
 }
 
 @utility display-3 {
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 2.6vw, 2.6rem);
+  font-size: clamp(1.6rem, 2.5vw, 2.5rem);
   line-height: 1.08;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   line-height: 1.5;
+  font-variant-numeric: tabular-nums;
 }
 
 @utility lede {
-  font-size: clamp(1.05rem, 1.25vw, 1.25rem);
-  line-height: 1.6;
+  font-size: clamp(1.06rem, 1.22vw, 1.25rem);
+  line-height: 1.58;
+  font-weight: 400;
+  letter-spacing: -0.006em;
 }
 
 @utility body-copy {
-  font-size: clamp(0.98rem, 1.05vw, 1.0625rem);
-  line-height: 1.75;
+  font-size: clamp(0.98rem, 1.02vw, 1.0625rem);
+  line-height: 1.72;
+  letter-spacing: -0.002em;
 }
 
 @utility numeral {
@@ -308,25 +355,25 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding-block: 0.5rem;
-  transition: color 300ms var(--ease-architectural);
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0.15rem;
-    height: 1px;
-    background: var(--copper);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 450ms var(--ease-architectural);
-  }
-  &:hover::after,
-  &[data-status="active"]::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
+  padding-block: 0.6rem;
+  transition:
+    color 400ms var(--ease-cinematic),
+    opacity 400ms var(--ease-cinematic);
+}
+
+/* Single copper rule that glides between primary links */
+@utility nav-indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0.2rem;
+  height: 1px;
+  width: 1px;
+  background: var(--copper);
+  transform-origin: left;
+  pointer-events: none;
+  transition:
+    transform 650ms var(--ease-cinematic),
+    opacity 400ms var(--ease-cinematic);
 }
 
 /* ---------- Image treatments ---------- */
@@ -339,7 +386,9 @@
 @utility img-zoom {
   overflow: hidden;
   & img {
-    transition: transform 1400ms var(--ease-architectural);
+    transition:
+      transform 1600ms var(--ease-cinematic),
+      opacity 1000ms var(--ease-cinematic);
   }
   &:hover img,
   .group:hover & img {
@@ -371,8 +420,14 @@
   will-change: opacity;
   & img {
     transform: scale(1.06);
-    transition: transform 3200ms cubic-bezier(0.25, 0.1, 0.25, 1);
+    transition:
+      transform 3200ms cubic-bezier(0.25, 0.1, 0.25, 1),
+      opacity 1200ms var(--ease-cinematic);
     will-change: transform;
+  }
+  .js &[data-loaded="false"] img {
+    opacity: 0;
+    transform: scale(1.12);
   }
   &[data-active="true"] {
     opacity: 1;
@@ -446,9 +501,171 @@
   animation: hero-progress 2000ms linear both;
 }
 
+/* ---------- Cinematic image loading ---------- */
+@utility ei {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1500ms var(--ease-cinematic);
+  &[data-inview="false"] {
+    clip-path: inset(7% 5% 7% 5%);
+  }
+}
+
+@utility ei-img {
+  position: relative;
+  transition:
+    opacity 1000ms var(--ease-cinematic),
+    transform 1600ms var(--ease-cinematic);
+  .js [data-loaded="false"] > & {
+    opacity: 0;
+  }
+  [data-inview="false"] > &:not([data-parallax]) {
+    transform: scale(1.08);
+  }
+}
+
+@utility ei-lqip {
+  position: absolute;
+  inset: -6%;
+  background-size: cover;
+  filter: blur(18px) saturate(1.1);
+  transform: scale(1.04);
+  transition: opacity 900ms 250ms var(--ease-cinematic);
+  [data-loaded="true"] > & {
+    opacity: 0;
+  }
+}
+
+/* ---------- Display lettering ---------- */
+@utility word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.06em 0.14em 0.26em;
+  margin: -0.06em -0.14em -0.26em;
+}
+
+@utility word-rise {
+  display: inline-block;
+  /* Box extends past ascenders, descenders and italic overhang so the gradient fill reaches every stroke */
+  padding: 0.06em 0.14em 0.26em;
+  margin: -0.06em -0.14em -0.26em;
+  animation: word-rise 1400ms var(--ease-cinematic) both;
+  animation-delay: var(--rise-delay, 0ms);
+}
+
+@keyframes word-rise {
+  from {
+    transform: translate3d(0, 112%, 0) rotate(3deg);
+    transform-origin: 0 100%;
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* Lettering that takes its light from the photograph behind it */
+@utility text-luminous {
+  filter: var(--shadow-letter);
+  & .word-rise {
+    background-image: var(--gradient-luminous);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  & em .word-rise,
+  & .is-warm .word-rise {
+    background-image: var(--gradient-luminous-warm);
+  }
+}
+
+@utility scrim-vignette {
+  background: var(--gradient-vignette);
+}
+
+/* Hold entrance choreography until the display face is ready (max ~1.2s) */
+.fonts-pending .rise-in,
+.fonts-pending .word-rise,
+.fonts-pending .rule-draw {
+  animation-play-state: paused;
+}
+
+/* ---------- Scroll cue ---------- */
+@utility scroll-cue {
+  position: relative;
+  width: 1px;
+  height: 3.5rem;
+  overflow: hidden;
+  background: var(--rule-dark);
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 40%;
+    background: var(--copper);
+    animation: scroll-cue 2400ms var(--ease-cinematic) infinite;
+  }
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  70%,
+  100% {
+    transform: translateY(260%);
+  }
+}
+
+/* ---------- Page transitions (View Transitions API) ---------- */
+::view-transition-old(root) {
+  animation: vt-out 420ms var(--ease-cinematic) both;
+}
+::view-transition-new(root) {
+  animation: vt-in 760ms var(--ease-cinematic) both;
+}
+::view-transition-group(site-header) {
+  animation-duration: 500ms;
+}
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+}
+
+/* ---------- Smooth scrolling (Lenis) ---------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+  .word-rise {
+    animation: none !important;
   }
   *,
   *::before,
