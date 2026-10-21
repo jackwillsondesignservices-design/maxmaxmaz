@@ -18,7 +18,15 @@ type PageHeroProps = {
  * Cinematic internal-page hero: the photograph opens from its blurred preview and settles,
  * then the headline rises word by word, lit to match the image.
  */
-export function PageHero({ image, label, index, title, intro, align = "bottom", height = "tall" }: PageHeroProps) {
+export function PageHero({
+  image,
+  label,
+  index,
+  title,
+  intro,
+  align = "bottom",
+  height = "tall",
+}: PageHeroProps) {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -37,7 +45,10 @@ export function PageHero({ image, label, index, title, intro, align = "bottom", 
         align === "bottom" ? "items-end" : "items-center",
       )}
     >
-      <div className="absolute inset-0 -z-20 overflow-hidden" style={image.tone ? { backgroundColor: image.tone } : undefined}>
+      <div
+        className="absolute inset-0 -z-20 overflow-hidden"
+        style={image.tone ? { backgroundColor: image.tone } : undefined}
+      >
         {image.lqip && (
           <div
             aria-hidden="true"
@@ -60,7 +71,12 @@ export function PageHero({ image, label, index, title, intro, align = "bottom", 
             onLoad={() => setLoaded(true)}
             onError={() => setLoaded(true)}
             className="img-cover hero-img"
-            style={{ "--pos": image.position, "--pos-m": image.mobilePosition ?? image.position } as CSSProperties}
+            style={
+              {
+                "--pos": image.position,
+                "--pos-m": image.mobilePosition ?? image.position,
+              } as CSSProperties
+            }
           />
         </div>
       </div>
@@ -77,7 +93,10 @@ export function PageHero({ image, label, index, title, intro, align = "bottom", 
           <SplitWords text={title} delay={220} step={75} />
         </h1>
         {intro && (
-          <p className="lede mt-8 max-w-xl text-on-dark-muted rise-in" style={riseDelay(420 + words * 75)}>
+          <p
+            className="lede mt-8 max-w-xl text-on-dark-muted rise-in"
+            style={riseDelay(420 + words * 75)}
+          >
             {intro}
           </p>
         )}

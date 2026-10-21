@@ -131,7 +131,8 @@
   --sidebar-ring: var(--copper);
 
   /* Overlays and gradients */
-  --gradient-hero: linear-gradient(
+  --gradient-hero:
+    linear-gradient(
       90deg,
       oklch(0.2 0.02 164 / 78%) 0%,
       oklch(0.2 0.02 164 / 45%) 38%,
@@ -139,20 +140,45 @@
     ),
     linear-gradient(0deg, oklch(0.18 0.02 164 / 80%) 0%, oklch(0.18 0.02 164 / 0%) 55%),
     linear-gradient(180deg, oklch(0.18 0.02 164 / 45%) 0%, oklch(0.18 0.02 164 / 0%) 22%);
-  --gradient-hero-mobile: linear-gradient(
+  --gradient-hero-mobile:
+    linear-gradient(
       0deg,
       oklch(0.18 0.02 164 / 92%) 0%,
       oklch(0.18 0.02 164 / 55%) 48%,
       oklch(0.18 0.02 164 / 10%) 75%
     ),
     linear-gradient(180deg, oklch(0.18 0.02 164 / 55%) 0%, oklch(0.18 0.02 164 / 0%) 25%);
-  --gradient-scrim: linear-gradient(0deg, oklch(0.18 0.02 164 / 85%) 0%, oklch(0.18 0.02 164 / 20%) 60%, oklch(0.18 0.02 164 / 35%) 100%);
-  --gradient-cta: linear-gradient(90deg, oklch(0.2 0.02 164 / 88%) 0%, oklch(0.2 0.02 164 / 55%) 55%, oklch(0.2 0.02 164 / 25%) 100%);
+  --gradient-scrim: linear-gradient(
+    0deg,
+    oklch(0.18 0.02 164 / 85%) 0%,
+    oklch(0.18 0.02 164 / 20%) 60%,
+    oklch(0.18 0.02 164 / 35%) 100%
+  );
+  --gradient-cta: linear-gradient(
+    90deg,
+    oklch(0.2 0.02 164 / 88%) 0%,
+    oklch(0.2 0.02 164 / 55%) 55%,
+    oklch(0.2 0.02 164 / 25%) 100%
+  );
 
-  --gradient-vignette: radial-gradient(130% 95% at 50% 38%, oklch(0.18 0.02 164 / 0%) 55%, oklch(0.16 0.02 164 / 55%) 100%);
+  --gradient-vignette: radial-gradient(
+    130% 95% at 50% 38%,
+    oklch(0.18 0.02 164 / 0%) 55%,
+    oklch(0.16 0.02 164 / 55%) 100%
+  );
   /* Display lettering lit like the photographs: cool limestone at the cap height, warm evening light at the baseline */
-  --gradient-luminous: linear-gradient(180deg, oklch(0.985 0.008 90) 0%, oklch(0.965 0.014 86) 45%, oklch(0.9 0.035 74) 100%);
-  --gradient-luminous-warm: linear-gradient(180deg, oklch(0.975 0.014 84) 0%, oklch(0.94 0.026 78) 45%, oklch(0.86 0.05 66) 100%);
+  --gradient-luminous: linear-gradient(
+    180deg,
+    oklch(0.985 0.008 90) 0%,
+    oklch(0.965 0.014 86) 45%,
+    oklch(0.9 0.035 74) 100%
+  );
+  --gradient-luminous-warm: linear-gradient(
+    180deg,
+    oklch(0.975 0.014 84) 0%,
+    oklch(0.94 0.026 78) 45%,
+    oklch(0.86 0.05 66) 100%
+  );
   --shadow-letter: drop-shadow(0 0.04em 0.35em oklch(0.16 0.02 164 / 45%));
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 

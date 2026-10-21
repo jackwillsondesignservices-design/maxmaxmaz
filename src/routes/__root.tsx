@@ -27,7 +27,10 @@ function NotFoundComponent() {
           The page you’re looking for doesn’t exist or has moved.
         </p>
         <Link to="/" className="link-quiet mt-10 text-on-dark">
-          Return home <span className="arrow" aria-hidden="true">→</span>
+          Return home{" "}
+          <span className="arrow" aria-hidden="true">
+            →
+          </span>
         </Link>
       </div>
     </div>

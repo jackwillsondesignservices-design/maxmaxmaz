@@ -1,6 +1,11 @@
 import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { enquiryTopics, validateEnquiry, type EnquiryErrors, type EnquiryInput } from "@/lib/enquiry";
+import {
+  enquiryTopics,
+  validateEnquiry,
+  type EnquiryErrors,
+  type EnquiryInput,
+} from "@/lib/enquiry";
 import { cn } from "@/lib/utils";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -52,18 +57,19 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div ref={statusRef} tabIndex={-1} role="status" className="border-t border-copper pt-10 focus:outline-none">
+      <div
+        ref={statusRef}
+        tabIndex={-1}
+        role="status"
+        className="border-t border-copper pt-10 focus:outline-none"
+      >
         <p className="eyebrow text-copper-deep">Message received</p>
         <h2 className="display-3 mt-4">Thank you — your enquiry has been saved.</h2>
         <p className="body-copy mt-4 max-w-md text-on-light-muted">
-          It has been recorded securely and will be read by the site owner. Replies are sent to the email address you
-          provided.
+          It has been recorded securely and will be read by the site owner. Replies are sent to the
+          email address you provided.
         </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="link-quiet mt-8"
-        >
+        <button type="button" onClick={() => setStatus("idle")} className="link-quiet mt-8">
           Send another message
         </button>
       </div>
@@ -108,26 +114,35 @@ export function ContactForm() {
 
       <Field id="topic" label="Enquiry topic" error={errors.topic}>
         <div className="relative">
-        <select
-          id="enquiry-topic"
-          name="topic"
-          required
-          value={values.topic}
-          onChange={set("topic")}
-          aria-invalid={!!errors.topic}
-          aria-describedby={errors.topic ? "enquiry-topic-error" : undefined}
-          className={cn(fieldBase, "cursor-pointer appearance-none pr-8", !values.topic && "text-on-light-muted")}
-        >
-          <option value="" disabled>
-            Choose a topic
-          </option>
-          {enquiryTopics.map((t) => (
-            <option key={t.value} value={t.value}>
-              {t.label}
+          <select
+            id="enquiry-topic"
+            name="topic"
+            required
+            value={values.topic}
+            onChange={set("topic")}
+            aria-invalid={!!errors.topic}
+            aria-describedby={errors.topic ? "enquiry-topic-error" : undefined}
+            className={cn(
+              fieldBase,
+              "cursor-pointer appearance-none pr-8",
+              !values.topic && "text-on-light-muted",
+            )}
+          >
+            <option value="" disabled>
+              Choose a topic
             </option>
-          ))}
-        </select>
-        <span aria-hidden="true" className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 text-copper-deep">↓</span>
+            {enquiryTopics.map((t) => (
+              <option key={t.value} value={t.value}>
+                {t.label}
+              </option>
+            ))}
+          </select>
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 text-copper-deep"
+          >
+            ↓
+          </span>
         </div>
       </Field>
 
@@ -146,7 +161,12 @@ export function ContactForm() {
       </Field>
 
       {status === "error" && (
-        <div ref={statusRef} tabIndex={-1} role="alert" className="border-l-2 border-destructive pl-4 focus:outline-none">
+        <div
+          ref={statusRef}
+          tabIndex={-1}
+          role="alert"
+          className="border-l-2 border-destructive pl-4 focus:outline-none"
+        >
           <p className="font-semibold text-destructive">Your message could not be sent.</p>
           <p className="body-copy text-on-light-muted">
             Nothing was saved. Please check your connection and try again in a moment.
@@ -166,7 +186,10 @@ export function ContactForm() {
         >
           {submitting ? (
             <>
-              <span className="h-3 w-3 animate-spin rounded-full border border-on-dark border-t-transparent" aria-hidden="true" />
+              <span
+                className="h-3 w-3 animate-spin rounded-full border border-on-dark border-t-transparent"
+                aria-hidden="true"
+              />
               Sending…
             </>
           ) : (

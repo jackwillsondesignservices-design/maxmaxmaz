@@ -71,21 +71,30 @@ function EnergyPage() {
           </Reveal>
           <Reveal delay={150} className="space-y-6 md:col-span-5 md:col-start-8 md:pt-28">
             <p className="lede">
-              Energy efficiency depends on the building, its existing systems and the way it is used. A Victorian terrace
-              and a new-build flat call for very different approaches.
+              Energy efficiency depends on the building, its existing systems and the way it is
+              used. A Victorian terrace and a new-build flat call for very different approaches.
             </p>
             <p className="body-copy text-on-light-muted">
-              Before thinking about products, it helps to understand the fabric of the home, how it is heated and where
-              comfort is lacking.
+              Before thinking about products, it helps to understand the fabric of the home, how it
+              is heated and where comfort is lacking.
             </p>
           </Reveal>
         </div>
         <div className="container-editorial mt-16 grid gap-6 md:mt-24 md:grid-cols-12">
           <Reveal className="md:col-span-7">
-            <EditorialImage image={images.energyInterior} className="aspect-[3/2]" sizes="(min-width: 768px) 58vw, 100vw" parallax={4} />
+            <EditorialImage
+              image={images.energyInterior}
+              className="aspect-[3/2]"
+              sizes="(min-width: 768px) 58vw, 100vw"
+              parallax={4}
+            />
           </Reveal>
           <Reveal delay={150} className="md:col-span-4 md:col-start-9 md:pt-32">
-            <EditorialImage image={images.energyExterior} className="aspect-[4/5]" sizes="(min-width: 768px) 33vw, 80vw" />
+            <EditorialImage
+              image={images.energyExterior}
+              className="aspect-[4/5]"
+              sizes="(min-width: 768px) 33vw, 80vw"
+            />
           </Reveal>
         </div>
       </section>
@@ -105,7 +114,9 @@ function EnergyPage() {
             {areas.map((a, i) => (
               <Reveal key={a.title} delay={(i % 2) * 100}>
                 <article className="grid grid-cols-[3.5rem_1fr] gap-4 border-t border-rule-dark py-10">
-                  <span className="numeral text-3xl text-copper">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="numeral text-3xl text-copper">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <div>
                     <h3 className="display-3">{a.title}</h3>
                     <p className="body-copy mt-4 text-on-dark-muted">{a.body}</p>
@@ -124,14 +135,14 @@ function EnergyPage() {
             <SectionLabel index="03">Improvements & priorities</SectionLabel>
             <h2 className="display-2 mt-10 max-w-[13ch]">Weigh it up before you start.</h2>
             <p className="body-copy mt-8 text-on-light-muted">
-              Before making changes, consider the condition of the property, installation requirements, upfront costs
-              and the potential benefits for your particular home. Savings vary widely, so treat any general figures
-              with caution.
+              Before making changes, consider the condition of the property, installation
+              requirements, upfront costs and the potential benefits for your particular home.
+              Savings vary widely, so treat any general figures with caution.
             </p>
             <div className="mt-8 border-l-2 border-copper pl-5">
               <p className="body-copy text-charcoal">
-                Electrical, gas, heating and structural work should be carried out by suitably qualified and registered
-                professionals — not as DIY projects.
+                Electrical, gas, heating and structural work should be carried out by suitably
+                qualified and registered professionals — not as DIY projects.
               </p>
             </div>
           </Reveal>
@@ -152,11 +163,31 @@ function EnergyPage() {
             <h2 className="display-3 mt-8 max-w-[14ch]">Official and independent UK guidance.</h2>
           </Reveal>
           <Reveal delay={120} className="md:col-span-7 md:col-start-6">
-            <SourceLink publisher="GOV.UK" title="Find ways to save energy in your home" href="https://www.gov.uk/improve-energy-efficiency" />
-            <SourceLink publisher="GOV.UK" title="Find an energy certificate (EPC)" href="https://www.gov.uk/find-energy-certificate" />
-            <SourceLink publisher="GOV.UK" title="Boiler Upgrade Scheme" href="https://www.gov.uk/apply-boiler-upgrade-scheme" />
-            <SourceLink publisher="Energy Saving Trust" title="Independent energy advice" href="https://energysavingtrust.org.uk/" />
-            <SourceLink publisher="Gas Safe Register" title="Find a registered gas engineer" href="https://www.gassaferegister.co.uk/" />
+            <SourceLink
+              publisher="GOV.UK"
+              title="Find ways to save energy in your home"
+              href="https://www.gov.uk/improve-energy-efficiency"
+            />
+            <SourceLink
+              publisher="GOV.UK"
+              title="Find an energy certificate (EPC)"
+              href="https://www.gov.uk/find-energy-certificate"
+            />
+            <SourceLink
+              publisher="GOV.UK"
+              title="Boiler Upgrade Scheme"
+              href="https://www.gov.uk/apply-boiler-upgrade-scheme"
+            />
+            <SourceLink
+              publisher="Energy Saving Trust"
+              title="Independent energy advice"
+              href="https://energysavingtrust.org.uk/"
+            />
+            <SourceLink
+              publisher="Gas Safe Register"
+              title="Find a registered gas engineer"
+              href="https://www.gassaferegister.co.uk/"
+            />
           </Reveal>
         </div>
       </section>

@@ -39,7 +39,13 @@ const ph = (key: string) => {
 };
 
 /** Representative imagery only — not the client's own properties or projects. */
-const unsplash = (id: string, alt: string, width: number, height: number, position?: string): SiteImage => {
+const unsplash = (
+  id: string,
+  alt: string,
+  width: number,
+  height: number,
+  position?: string,
+): SiteImage => {
   const base = `https://images.unsplash.com/${id}?auto=format&fit=crop&q=70`;
   return {
     src: `${base}&w=1200`,
@@ -52,7 +58,14 @@ const unsplash = (id: string, alt: string, width: number, height: number, positi
   };
 };
 
-const hero = (key: string, lg: string, sm: string, alt: string, position: string, mobilePosition: string): SiteImage => ({
+const hero = (
+  key: string,
+  lg: string,
+  sm: string,
+  alt: string,
+  position: string,
+  mobilePosition: string,
+): SiteImage => ({
   ...ph(key),
   src: lg,
   srcSet: `${sm} 1000w, ${lg} 1920w`,
@@ -64,52 +77,52 @@ const hero = (key: string, lg: string, sm: string, alt: string, position: string
 });
 
 const heroDev = hero(
-    "hero-development",
-    heroDevelopment,
-    heroDevelopmentSm,
-    "Contemporary brick townhouses along a planted residential street in warm evening light",
-    "60% 50%",
-    "68% 50%",
+  "hero-development",
+  heroDevelopment,
+  heroDevelopmentSm,
+  "Contemporary brick townhouses along a planted residential street in warm evening light",
+  "60% 50%",
+  "68% 50%",
 );
 const heroTim = hero(
-    "hero-timber",
-    heroTimber,
-    heroTimberSm,
-    "Modern home in oak cladding and pale limestone with large windows above a landscaped garden",
-    "70% 50%",
-    "78% 50%",
+  "hero-timber",
+  heroTimber,
+  heroTimberSm,
+  "Modern home in oak cladding and pale limestone with large windows above a landscaped garden",
+  "70% 50%",
+  "78% 50%",
 );
 const heroBlue = hero(
-    "hero-bluehour",
-    heroBluehour,
-    heroBluehourSm,
-    "Brick house at blue hour with warm interior light and softly lit entrance",
-    "72% 50%",
-    "70% 50%",
+  "hero-bluehour",
+  heroBluehour,
+  heroBluehourSm,
+  "Brick house at blue hour with warm interior light and softly lit entrance",
+  "72% 50%",
+  "70% 50%",
 );
 const heroSol = hero(
-    "hero-solar",
-    heroSolar,
-    heroSolarSm,
-    "Timber and brick family home with roof-integrated solar panels set in an English garden",
-    "65% 45%",
-    "66% 45%",
+  "hero-solar",
+  heroSolar,
+  heroSolarSm,
+  "Timber and brick family home with roof-integrated solar panels set in an English garden",
+  "65% 45%",
+  "66% 45%",
 );
 const heroRet = hero(
-    "hero-retrofit",
-    heroRetrofit,
-    heroRetrofitSm,
-    "Victorian brick terrace with a contemporary bronze-clad extension and courtyard garden at dusk",
-    "55% 50%",
-    "60% 50%",
+  "hero-retrofit",
+  heroRetrofit,
+  heroRetrofitSm,
+  "Victorian brick terrace with a contemporary bronze-clad extension and courtyard garden at dusk",
+  "55% 50%",
+  "60% 50%",
 );
 const heroLand = hero(
-    "hero-landscape",
-    heroLandscape,
-    heroLandscapeSm,
-    "Timber-clad homes arranged around a shared green with mature oak trees and meadow planting",
-    "50% 55%",
-    "55% 55%",
+  "hero-landscape",
+  heroLandscape,
+  heroLandscapeSm,
+  "Timber-clad homes arranged around a shared green with mature oak trees and meadow planting",
+  "50% 55%",
+  "55% 55%",
 );
 
 export const heroFrames: SiteImage[] = [heroDev, heroTim, heroBlue, heroSol, heroRet, heroLand];

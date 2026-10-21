@@ -5,7 +5,15 @@ import { riseDelay } from "@/lib/motion";
  * Splits a headline into words that rise one by one from behind a mask.
  * Text stays real, selectable and readable by screen readers.
  */
-export function SplitWords({ text, delay = 0, step = 70 }: { text: string; delay?: number; step?: number }) {
+export function SplitWords({
+  text,
+  delay = 0,
+  step = 70,
+}: {
+  text: string;
+  delay?: number;
+  step?: number;
+}) {
   const words = text.split(" ");
   return (
     <>

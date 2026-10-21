@@ -11,7 +11,11 @@ export const enquiryTopics = [
 export type EnquiryTopic = (typeof enquiryTopics)[number]["value"];
 
 export const enquirySchema = z.object({
-  name: z.string().trim().min(1, "Please enter your name.").max(120, "Please keep your name under 120 characters."),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Please enter your name.")
+    .max(120, "Please keep your name under 120 characters."),
   email: z
     .string()
     .trim()
@@ -31,9 +35,9 @@ export const enquirySchema = z.object({
 export type EnquiryInput = z.infer<typeof enquirySchema>;
 export type EnquiryErrors = Partial<Record<keyof EnquiryInput, string>>;
 
-export function validateEnquiry(values: Record<keyof EnquiryInput, string>):
-  | { ok: true; data: EnquiryInput }
-  | { ok: false; errors: EnquiryErrors } {
+export function validateEnquiry(
+  values: Record<keyof EnquiryInput, string>,
+): { ok: true; data: EnquiryInput } | { ok: false; errors: EnquiryErrors } {
   const result = enquirySchema.safeParse(values);
   if (result.success) return { ok: true, data: result.data };
   const errors: EnquiryErrors = {};

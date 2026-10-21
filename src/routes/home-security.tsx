@@ -33,7 +33,13 @@ const areas = [
   { label: "Everyday habits", body: "Locking routines, keys, deliveries and time away from home." },
 ];
 
-const categories: { title: string; body: string; image: SiteImage; aspect: string; span: string }[] = [
+const categories: {
+  title: string;
+  body: string;
+  image: SiteImage;
+  aspect: string;
+  span: string;
+}[] = [
   {
     title: "Door and window security",
     body: "Locks, cylinders, frames and glazing — the physical fabric that does most of the work.",
@@ -89,17 +95,23 @@ function SecurityPage() {
             <SectionLabel index="01">Security considerations</SectionLabel>
             <h2 className="display-2 mt-10 max-w-[12ch]">Start with how the home is used.</h2>
             <p className="body-copy mt-8 max-w-md text-on-light-muted">
-              Good residential security is rarely about a single product. It comes from looking calmly at doors,
-              windows, access points, lighting and the everyday habits of the people who live there.
+              Good residential security is rarely about a single product. It comes from looking
+              calmly at doors, windows, access points, lighting and the everyday habits of the
+              people who live there.
             </p>
           </Reveal>
           <Reveal delay={150} className="md:col-span-6 md:col-start-7">
             <dl className="border-t border-rule-light">
               {areas.map((a, i) => (
-                <div key={a.label} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-rule-light py-6 md:grid-cols-[3rem_12rem_1fr]">
+                <div
+                  key={a.label}
+                  className="grid grid-cols-[3rem_1fr] gap-4 border-b border-rule-light py-6 md:grid-cols-[3rem_12rem_1fr]"
+                >
                   <span className="numeral text-copper-deep">0{i + 1}</span>
                   <dt className="font-display text-2xl">{a.label}</dt>
-                  <dd className="body-copy col-start-2 text-on-light-muted md:col-start-3">{a.body}</dd>
+                  <dd className="body-copy col-start-2 text-on-light-muted md:col-start-3">
+                    {a.body}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -116,15 +128,20 @@ function SecurityPage() {
               <h2 className="display-2 mt-10 max-w-[13ch]">Topics worth exploring.</h2>
             </div>
             <p className="body-copy self-end text-on-light-muted md:col-span-4 md:col-start-9">
-              General categories to understand before choosing anything specific. No particular brand or product is
-              recommended here.
+              General categories to understand before choosing anything specific. No particular
+              brand or product is recommended here.
             </p>
           </Reveal>
           <div className="mt-16 grid gap-16 md:mt-24 md:grid-cols-12 md:gap-x-8 md:gap-y-24">
             {categories.map((c, i) => (
               <Reveal key={c.title} delay={(i % 2) * 120} className={c.span}>
                 <article className="group">
-                  <EditorialImage image={c.image} className={c.aspect} sizes="(min-width: 768px) 45vw, 100vw" zoom />
+                  <EditorialImage
+                    image={c.image}
+                    className={c.aspect}
+                    sizes="(min-width: 768px) 45vw, 100vw"
+                    zoom
+                  />
                   <div className="mt-6 flex items-baseline gap-4">
                     <span className="numeral text-copper-deep">0{i + 1}</span>
                     <h3 className="display-3">{c.title}</h3>
@@ -148,8 +165,8 @@ function SecurityPage() {
           </Reveal>
           <Reveal delay={150} className="space-y-6 md:col-span-5 md:col-start-8 md:pt-24">
             <p className="lede text-on-dark">
-              Suitable products depend on the home itself, its existing fittings, the needs of the people who live there
-              and the requirements of each manufacturer.
+              Suitable products depend on the home itself, its existing fittings, the needs of the
+              people who live there and the requirements of each manufacturer.
             </p>
             <ul className="space-y-4 border-t border-rule-dark pt-6">
               {[
@@ -165,7 +182,8 @@ function SecurityPage() {
               ))}
             </ul>
             <p className="text-sm text-on-dark-muted">
-              No product can guarantee that a crime will be prevented. Security is about reducing risk sensibly.
+              No product can guarantee that a crime will be prevented. Security is about reducing
+              risk sensibly.
             </p>
           </Reveal>
         </div>
@@ -196,7 +214,8 @@ function SecurityPage() {
           {
             to: "/energy-saving",
             label: "Energy Saving",
-            description: "Smart controls and efficient lighting often sit alongside security choices.",
+            description:
+              "Smart controls and efficient lighting often sit alongside security choices.",
             image: images.energyInterior,
           },
           {

@@ -38,7 +38,10 @@ export function SiteFooter() {
               Questions about property, security, energy or sustainable housing are welcome.
             </p>
             <Link to="/contact" className="link-quiet mt-5 text-on-dark">
-              Start a conversation <span className="arrow" aria-hidden="true">→</span>
+              Start a conversation{" "}
+              <span className="arrow" aria-hidden="true">
+                →
+              </span>
             </Link>
           </div>
         </div>
@@ -46,7 +49,8 @@ export function SiteFooter() {
         <div className="flex flex-col gap-4 pt-8 text-[0.75rem] text-on-dark-muted md:flex-row md:items-center md:justify-between">
           <p className="eyebrow text-sage">{site.editorialLine}</p>
           <p>
-            © {year} {site.name}. Concept website. Information is general and not professional advice.
+            © {year} {site.name}. Concept website. Information is general and not professional
+            advice.
           </p>
         </div>
       </div>

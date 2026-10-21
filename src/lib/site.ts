@@ -6,8 +6,7 @@
 export const site = {
   name: "The Built Future",
   wordmark: "THE BUILT FUTURE",
-  shortStatement:
-    "A considered view of property, home security, energy and the future of housing.",
+  shortStatement: "A considered view of property, home security, energy and the future of housing.",
   editorialLine: "Property / Security / Energy / Housing",
 } as const;
 
@@ -25,7 +24,11 @@ export type NavItem = {
 };
 
 export const primaryNav: NavItem[] = [
-  { to: "/property-investment-development", label: "Property", longLabel: "Property Investment & Development" },
+  {
+    to: "/property-investment-development",
+    label: "Property",
+    longLabel: "Property Investment & Development",
+  },
   { to: "/home-security", label: "Home Security", longLabel: "Home Security" },
   { to: "/energy-saving", label: "Energy Saving", longLabel: "Energy Saving" },
   { to: "/sustainable-housing", label: "Sustainable Housing", longLabel: "Sustainable Housing" },
