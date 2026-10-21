@@ -117,15 +117,8 @@ export function HeroSlider({ className }: { className?: string }) {
       {first?.lqip && (
         <div
           aria-hidden="true"
-          className="hero-img absolute -inset-[6%] bg-cover blur-2xl"
-          style={
-            {
-              backgroundImage: `url("${first.lqip}")`,
-              backgroundPosition: "var(--pos-m)",
-              "--pos": first.position,
-              "--pos-m": first.mobilePosition,
-            } as CSSProperties
-          }
+          className="absolute -inset-[6%] bg-cover blur-2xl"
+          style={{ backgroundImage: `url("${first.lqip}")`, backgroundPosition: first.position }}
         />
       )}
       {heroFrames.map((frame, i) => {

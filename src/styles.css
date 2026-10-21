@@ -425,7 +425,7 @@
       opacity 1200ms var(--ease-cinematic);
     will-change: transform;
   }
-  &[data-loaded="false"] img {
+  .js &[data-loaded="false"] img {
     opacity: 0;
     transform: scale(1.12);
   }

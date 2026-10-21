@@ -2,8 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeroSlider } from "@/components/site/HeroSlider";
 import { EditorialImage } from "@/components/site/EditorialImage";
 import { Reveal } from "@/components/site/Reveal";
+import { SplitWords } from "@/components/site/SplitWords";
 import { ArrowLink, ClosingCta, SectionLabel } from "@/components/site/Editorial";
-import { images } from "@/lib/images";
+import { heroFrames, images } from "@/lib/images";
 import { riseDelay } from "@/lib/motion";
 import { site, type NavItem } from "@/lib/site";
 import type { SiteImage } from "@/lib/images";
@@ -22,6 +23,18 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: heroFrames[0]
+      ? [
+          {
+            rel: "preload",
+            as: "image",
+            href: heroFrames[0].src,
+            imageSrcSet: heroFrames[0].srcSet,
+            imageSizes: "100vw",
+            fetchPriority: "high",
+          },
+        ]
+      : [],
   }),
   component: HomePage,
 });
@@ -39,7 +52,7 @@ function HomePage() {
       <Journal />
       <ClosingCta
         image={images.bluehour}
-        title={<>Let’s look at property differently.</>}
+        title={<>Let’s look at property <em>differently.</em></>}
         copy="Interested in property, home security, energy efficiency or the future of housing? Start a conversation."
       />
     </>
@@ -55,7 +68,7 @@ function Hero() {
       {/* Editorial metadata — top right on desktop */}
       <div className="pointer-events-none absolute inset-x-0 top-28 hidden md:block">
         <div className="container-editorial flex justify-end">
-          <div className="max-w-[22rem] text-right rise-in" style={riseDelay(700)}>
+          <div className="max-w-[22rem] text-right rise-in" style={riseDelay(1100)}>
             <p className="eyebrow text-on-dark">Property / Development / Better living</p>
             <p className="eyebrow mt-3 border-t border-rule-dark pt-3 text-on-dark-muted">
               A more considered view of the built environment
@@ -64,30 +77,29 @@ function Hero() {
         </div>
       </div>
 
-      <div className="container-editorial relative pb-16 pt-40 md:pb-20">
-        <div className="grid items-end gap-10 md:grid-cols-12">
-          <div className="md:col-span-12">
-            <h1 className="display-hero">
-              <span className="block rise-in md:whitespace-nowrap" style={riseDelay(150)}>
-                A better future,
-              </span>
-              <span className="block rise-in italic text-on-dark/95 md:whitespace-nowrap" style={riseDelay(320)}>
-                built around property.
-              </span>
-            </h1>
-            <p className="lede mt-8 max-w-[34rem] text-on-dark-muted rise-in" style={riseDelay(520)}>
+      <div className="container-editorial relative pb-14 pt-40 md:pb-20">
+        <h1 className="display-hero text-luminous">
+          <span className="block md:whitespace-nowrap">
+            <SplitWords text="A better future," delay={200} step={90} />
+          </span>
+          <em className="block md:whitespace-nowrap">
+            <SplitWords text="built around property." delay={470} step={90} />
+          </em>
+        </h1>
+        <div className="mt-9 flex flex-col gap-10 md:mt-11 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="lede max-w-[33rem] text-on-dark-muted rise-in" style={riseDelay(900)}>
               Exploring property investment, thoughtful development, smarter home security and practical ways to make
               housing more efficient.
             </p>
-            <a
-              href="#approach"
-              className="link-quiet mt-10 text-on-dark rise-in"
-              style={riseDelay(700)}
-            >
+            <a href="#approach" className="link-quiet mt-9 text-on-dark rise-in" style={riseDelay(1050)}>
               Explore the approach <span className="arrow rotate-90" aria-hidden="true">→</span>
             </a>
           </div>
-
+          <div className="hidden items-end gap-5 rise-in md:flex" style={riseDelay(1300)} aria-hidden="true">
+            <span className="eyebrow text-on-dark-muted [writing-mode:vertical-rl]">Scroll</span>
+            <span className="scroll-cue" />
+          </div>
         </div>
         <p className="eyebrow mt-12 text-on-dark-muted md:hidden">Property / Development / Better living</p>
       </div>
@@ -103,7 +115,7 @@ function BrandStatement() {
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <Reveal className="md:col-span-7">
             <SectionLabel index="01">The approach</SectionLabel>
-            <h2 className="display-1 mt-10 max-w-[12ch]">Property is more than an address.</h2>
+            <h2 className="display-1 mt-10 max-w-[12ch]">Property is more than <em>an address.</em></h2>
           </Reveal>
           <Reveal delay={150} className="flex items-end md:col-span-4 md:col-start-9">
             <div>
@@ -290,7 +302,7 @@ function PropertySection() {
             <SectionLabel index="03" tone="dark">
               Property & development
             </SectionLabel>
-            <h2 className="display-1 mt-10 max-w-[10ch]">Look beyond the building.</h2>
+            <h2 className="display-1 mt-10 max-w-[10ch]">Look beyond <em>the building.</em></h2>
           </Reveal>
           <Reveal delay={150}>
             <p className="lede mt-8 max-w-md text-on-dark-muted">
@@ -315,7 +327,7 @@ function SecuritySection() {
         <Reveal className="order-2 flex flex-col justify-between md:order-1 md:col-span-5">
           <SectionLabel index="04">Home security</SectionLabel>
           <div className="mt-10 md:mt-0">
-            <h2 className="display-1 max-w-[11ch]">Feel at home in your home.</h2>
+            <h2 className="display-1 max-w-[11ch]">Feel at home <em>in your home.</em></h2>
             <p className="lede mt-8 max-w-md text-on-light-muted">
               Discover practical considerations for residential security, including the products, features and everyday
               measures that can help people make more informed choices about protecting their homes.
@@ -353,7 +365,7 @@ function EnergySection() {
           <SectionLabel index="05" tone="dark">
             Energy saving
           </SectionLabel>
-          <h2 className="display-1 mt-10 max-w-[11ch]">Make every home work smarter.</h2>
+          <h2 className="display-1 mt-10 max-w-[11ch]">Make every home <em>work smarter.</em></h2>
           <p className="lede mt-8 max-w-md text-on-dark-muted">
             Explore practical ways to think about energy use at home, from heating and lighting to insulation and
             everyday efficiency.
@@ -381,7 +393,7 @@ function SustainableSection() {
         <div className="grid gap-10 md:grid-cols-12">
           <Reveal className="md:col-span-6">
             <SectionLabel index="06">Sustainable housing</SectionLabel>
-            <h2 className="display-1 mt-10 max-w-[10ch]">Better homes. Better choices.</h2>
+            <h2 className="display-1 mt-10 max-w-[10ch]">Better homes. <em>Better choices.</em></h2>
           </Reveal>
           <Reveal delay={150} className="flex flex-col justify-end md:col-span-4 md:col-start-9">
             <p className="lede text-on-light-muted">
@@ -441,7 +453,7 @@ function Journal() {
         <Reveal className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
             <SectionLabel index="07">Journal — forthcoming</SectionLabel>
-            <h2 className="display-1 mt-10 max-w-[13ch]">Ideas for a better-built future.</h2>
+            <h2 className="display-1 mt-10 max-w-[13ch]">Ideas for a <em>better-built future.</em></h2>
           </div>
           <p className="body-copy max-w-sm text-on-light-muted">
             Planned article concepts. Full articles are in preparation — in the meantime, each links to the related
