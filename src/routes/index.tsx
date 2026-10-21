@@ -88,7 +88,7 @@ function Hero() {
       <div className="container-editorial relative pb-10 pt-40 md:pb-14">
         <div className="mb-7 flex items-center gap-4 rise-in md:mb-9" style={riseDelay(120)}>
           <span className="h-px w-10 bg-copper rule-draw" style={riseDelay(220)} />
-          <span className="eyebrow text-on-dark-muted">Property, considered differently</span>
+          <span className="eyebrow text-on-dark">Property, considered differently</span>
         </div>
 
         <h1 className="display-hero text-luminous">
@@ -135,9 +135,14 @@ function Hero() {
                 <span key={frame} className="hero-count text-2xl">
                   {String(frame + 1).padStart(2, "0")}
                 </span>
-                <span className="text-sm text-on-dark-muted">/ {String(total).padStart(2, "0")}</span>
+                <span className="text-sm text-on-dark-muted">
+                  / {String(total).padStart(2, "0")}
+                </span>
               </p>
-              <p key={`c-${frame}`} className="hero-caption eyebrow mt-2 truncate text-on-dark-muted">
+              <p
+                key={`c-${frame}`}
+                className="hero-caption eyebrow mt-2 truncate text-on-dark-muted"
+              >
                 {heroCaptions[frame]}
               </p>
             </div>

@@ -143,9 +143,10 @@
   --gradient-hero-mobile:
     linear-gradient(
       0deg,
-      oklch(0.18 0.02 164 / 92%) 0%,
-      oklch(0.18 0.02 164 / 55%) 48%,
-      oklch(0.18 0.02 164 / 10%) 75%
+      oklch(0.18 0.02 164 / 94%) 0%,
+      oklch(0.18 0.02 164 / 74%) 42%,
+      oklch(0.18 0.02 164 / 38%) 66%,
+      oklch(0.18 0.02 164 / 8%) 86%
     ),
     linear-gradient(180deg, oklch(0.18 0.02 164 / 55%) 0%, oklch(0.18 0.02 164 / 0%) 25%);
   --gradient-scrim: linear-gradient(
