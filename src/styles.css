@@ -386,7 +386,9 @@
 @utility img-zoom {
   overflow: hidden;
   & img {
-    transition: transform 1400ms var(--ease-architectural);
+    transition:
+      transform 1600ms var(--ease-cinematic),
+      opacity 1000ms var(--ease-cinematic);
   }
   &:hover img,
   .group:hover & img {
