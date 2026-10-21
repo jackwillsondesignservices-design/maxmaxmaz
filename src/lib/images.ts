@@ -127,6 +127,16 @@ const heroLand = hero(
 
 export const heroFrames: SiteImage[] = [heroDev, heroTim, heroBlue, heroSol, heroRet, heroLand];
 
+/** Short material captions shown with the hero counter — describe the scene, never claim it as a project. */
+export const heroCaptions = [
+  "Brick, planting, evening light",
+  "Oak cladding and limestone",
+  "Blue hour, warm interiors",
+  "Timber, brick and solar",
+  "Victorian brick, bronze addition",
+  "Timber homes around a green",
+];
+
 export const images = {
   development: heroDev,
   timber: heroTim,

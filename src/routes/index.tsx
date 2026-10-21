@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { HeroSlider } from "@/components/site/HeroSlider";
 import { EditorialImage } from "@/components/site/EditorialImage";
 import { Reveal } from "@/components/site/Reveal";
 import { SplitWords } from "@/components/site/SplitWords";
 import { ArrowLink, ClosingCta, SectionLabel } from "@/components/site/Editorial";
-import { heroFrames, images } from "@/lib/images";
+import { heroCaptions, heroFrames, images } from "@/lib/images";
 import { riseDelay } from "@/lib/motion";
 import { site, type NavItem } from "@/lib/site";
 import type { SiteImage } from "@/lib/images";
@@ -65,9 +66,12 @@ function HomePage() {
 
 /* ---------------- A. Hero ---------------- */
 function Hero() {
+  const [frame, setFrame] = useState(0);
+  const total = heroFrames.length;
+
   return (
     <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-forest text-on-dark md:min-h-[96svh]">
-      <HeroSlider className="-z-10" />
+      <HeroSlider className="-z-10" onChange={setFrame} />
 
       {/* Editorial metadata — top right on desktop */}
       <div className="pointer-events-none absolute inset-x-0 top-28 hidden md:block">
@@ -81,7 +85,12 @@ function Hero() {
         </div>
       </div>
 
-      <div className="container-editorial relative pb-14 pt-40 md:pb-20">
+      <div className="container-editorial relative pb-10 pt-40 md:pb-14">
+        <div className="mb-7 flex items-center gap-4 rise-in md:mb-9" style={riseDelay(120)}>
+          <span className="h-px w-10 bg-copper rule-draw" style={riseDelay(220)} />
+          <span className="eyebrow text-on-dark-muted">Property, considered differently</span>
+        </div>
+
         <h1 className="display-hero text-luminous">
           <span className="block md:whitespace-nowrap">
             <SplitWords text="A better future," delay={200} step={90} />
@@ -90,35 +99,54 @@ function Hero() {
             <SplitWords text="built around property." delay={470} step={90} />
           </em>
         </h1>
-        <div className="mt-9 flex flex-col gap-10 md:mt-11 md:flex-row md:items-end md:justify-between">
-          <div>
+
+        <div className="mt-8 grid gap-10 md:mt-11 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-7 lg:col-span-6">
             <p className="lede max-w-[33rem] text-on-dark-muted rise-in" style={riseDelay(900)}>
               Exploring property investment, thoughtful development, smarter home security and
               practical ways to make housing more efficient.
             </p>
-            <a
-              href="#approach"
-              className="link-quiet mt-9 text-on-dark rise-in"
+            <div
+              className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-5 rise-in"
               style={riseDelay(1050)}
             >
-              Explore the approach{" "}
-              <span className="arrow rotate-90" aria-hidden="true">
-                →
-              </span>
-            </a>
+              <Link to="/contact" className="btn-hero">
+                <span className="relative">Start a conversation</span>
+                <span className="arrow relative" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+              <a href="#approach" className="link-quiet text-on-dark">
+                Explore the approach{" "}
+                <span className="arrow rotate-90" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </div>
           </div>
+
+          {/* Frame counter + caption, and scroll cue */}
           <div
-            className="hidden items-end gap-5 rise-in md:flex"
+            className="flex items-end justify-between gap-6 border-t border-rule-dark pt-5 rise-in md:col-span-5 md:col-start-8 md:border-t-0 md:pt-0 lg:col-span-4 lg:col-start-9"
             style={riseDelay(1300)}
-            aria-hidden="true"
           >
-            <span className="eyebrow text-on-dark-muted [writing-mode:vertical-rl]">Scroll</span>
-            <span className="scroll-cue" />
+            <div className="min-w-0 flex-1" aria-hidden="true">
+              <p className="numeral flex items-baseline gap-2 text-on-dark">
+                <span key={frame} className="hero-count text-2xl">
+                  {String(frame + 1).padStart(2, "0")}
+                </span>
+                <span className="text-sm text-on-dark-muted">/ {String(total).padStart(2, "0")}</span>
+              </p>
+              <p key={`c-${frame}`} className="hero-caption eyebrow mt-2 truncate text-on-dark-muted">
+                {heroCaptions[frame]}
+              </p>
+            </div>
+            <div className="hidden items-end gap-4 md:flex" aria-hidden="true">
+              <span className="eyebrow text-on-dark-muted [writing-mode:vertical-rl]">Scroll</span>
+              <span className="scroll-cue" />
+            </div>
           </div>
         </div>
-        <p className="eyebrow mt-12 text-on-dark-muted md:hidden">
-          Property / Development / Better living
-        </p>
       </div>
     </section>
   );

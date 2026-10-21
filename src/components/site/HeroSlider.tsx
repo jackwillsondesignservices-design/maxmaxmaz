@@ -31,7 +31,14 @@ function preload(src: string, srcSet?: string) {
  * The first frame opens from its own blurred preview; the schedule starts once it is sharp.
  * Each next frame is fully decoded before it is shown, so nothing ever flashes in half-loaded.
  */
-export function HeroSlider({ className }: { className?: string }) {
+export function HeroSlider({
+  className,
+  onChange,
+}: {
+  className?: string;
+  /** Called with the index of the frame now showing */
+  onChange?: (index: number) => void;
+}) {
   const [active, setActive] = useState(0);
   const [leaving, setLeaving] = useState<number | null>(null);
   const [ready, setReady] = useState<Set<number>>(() => new Set([0]));
@@ -40,7 +47,9 @@ export function HeroSlider({ className }: { className?: string }) {
   const readyRef = useRef(ready);
   const activeRef = useRef(0);
   const firstImgRef = useRef<HTMLImageElement | null>(null);
+  const onChangeRef = useRef(onChange);
   readyRef.current = ready;
+  onChangeRef.current = onChange;
 
   // The first image may finish before hydration.
   useEffect(() => {
@@ -84,6 +93,7 @@ export function HeroSlider({ className }: { className?: string }) {
           setLeaving(current);
           setActive(next);
           setCycle((c) => c + 1);
+          onChangeRef.current?.(next);
           void prepare((next + 1) % heroFrames.length);
         } else {
           // Hold the current frame rather than flash a blank one.

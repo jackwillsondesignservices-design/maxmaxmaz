@@ -625,6 +625,67 @@
   animation-play-state: paused;
 }
 
+/* ---------- Hero details ---------- */
+@utility btn-hero {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  overflow: hidden;
+  padding: 1.05rem 1.6rem;
+  background: var(--limestone);
+  color: var(--forest);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: color 500ms var(--ease-cinematic);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--copper);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 600ms var(--ease-cinematic);
+  }
+  &:hover {
+    color: var(--paper);
+  }
+  &:hover::before {
+    transform: scaleY(1);
+  }
+  & .arrow {
+    transition: transform 500ms var(--ease-cinematic);
+  }
+  &:hover .arrow {
+    transform: translateX(4px);
+  }
+}
+
+@utility hero-count {
+  display: inline-block;
+  animation: count-in 700ms var(--ease-cinematic) both;
+}
+
+@utility hero-caption {
+  animation: caption-in 900ms var(--ease-cinematic) both;
+}
+
+@keyframes count-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.45em, 0);
+  }
+}
+
+@keyframes caption-in {
+  from {
+    opacity: 0;
+    letter-spacing: 0.34em;
+  }
+}
+
 /* ---------- Scroll cue ---------- */
 @utility scroll-cue {
   position: relative;
