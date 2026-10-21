@@ -16,6 +16,7 @@ import energyExterior from "@/assets/energy-exterior.webp";
 import energyInsulation from "@/assets/energy-insulation.webp";
 import materialsDetail from "@/assets/materials-detail.webp";
 import propertyModel from "@/assets/property-model.webp";
+import { placeholders } from "./placeholders";
 
 export type SiteImage = {
   src: string;
@@ -26,6 +27,15 @@ export type SiteImage = {
   /** object-position for desktop / mobile crops */
   position?: string | undefined;
   mobilePosition?: string | undefined;
+  /** Tiny blurred preview shown while the full image loads */
+  lqip?: string | undefined;
+  /** Average colour of the photograph, used as the loading ground */
+  tone?: string | undefined;
+};
+
+const ph = (key: string) => {
+  const p = placeholders[key];
+  return p ? { lqip: p.lqip, tone: p.tone } : {};
 };
 
 /** Representative imagery only — not the client's own properties or projects. */
@@ -38,10 +48,12 @@ const unsplash = (id: string, alt: string, width: number, height: number, positi
     width,
     height,
     position,
+    ...ph(id),
   };
 };
 
-const hero = (lg: string, sm: string, alt: string, position: string, mobilePosition: string): SiteImage => ({
+const hero = (key: string, lg: string, sm: string, alt: string, position: string, mobilePosition: string): SiteImage => ({
+  ...ph(key),
   src: lg,
   srcSet: `${sm} 1000w, ${lg} 1920w`,
   alt,
@@ -52,6 +64,7 @@ const hero = (lg: string, sm: string, alt: string, position: string, mobilePosit
 });
 
 const heroDev = hero(
+    "hero-development",
     heroDevelopment,
     heroDevelopmentSm,
     "Contemporary brick townhouses along a planted residential street in warm evening light",
@@ -59,6 +72,7 @@ const heroDev = hero(
     "68% 50%",
 );
 const heroTim = hero(
+    "hero-timber",
     heroTimber,
     heroTimberSm,
     "Modern home in oak cladding and pale limestone with large windows above a landscaped garden",
@@ -66,6 +80,7 @@ const heroTim = hero(
     "78% 50%",
 );
 const heroBlue = hero(
+    "hero-bluehour",
     heroBluehour,
     heroBluehourSm,
     "Brick house at blue hour with warm interior light and softly lit entrance",
@@ -73,6 +88,7 @@ const heroBlue = hero(
     "70% 50%",
 );
 const heroSol = hero(
+    "hero-solar",
     heroSolar,
     heroSolarSm,
     "Timber and brick family home with roof-integrated solar panels set in an English garden",
@@ -80,6 +96,7 @@ const heroSol = hero(
     "66% 45%",
 );
 const heroRet = hero(
+    "hero-retrofit",
     heroRetrofit,
     heroRetrofitSm,
     "Victorian brick terrace with a contemporary bronze-clad extension and courtyard garden at dusk",
@@ -87,6 +104,7 @@ const heroRet = hero(
     "60% 50%",
 );
 const heroLand = hero(
+    "hero-landscape",
     heroLandscape,
     heroLandscapeSm,
     "Timber-clad homes arranged around a shared green with mature oak trees and meadow planting",
@@ -105,36 +123,42 @@ export const images = {
   landscape: heroLand,
   securityDoor: {
     src: securityDoor,
+    ...ph("security-door"),
     alt: "Dark green timber front door with a brushed bronze pull handle, lock cylinder and a video doorbell on the brick reveal",
     width: 1120,
     height: 1400,
   } satisfies SiteImage,
   energyInterior: {
     src: energyInterior,
+    ...ph("energy-interior"),
     alt: "Calm living room in a period home with a sash window, column radiator and wall-mounted heating control",
     width: 1400,
     height: 933,
   } satisfies SiteImage,
   energyExterior: {
     src: energyExterior,
+    ...ph("energy-exterior"),
     alt: "Side of a brick and timber home with an air source heat pump on a stone plinth beside lavender planting",
     width: 1120,
     height: 1400,
   } satisfies SiteImage,
   insulation: {
     src: energyInsulation,
+    ...ph("energy-insulation"),
     alt: "Wood-fibre insulation boards fitted neatly between exposed timber roof rafters beside a roof window",
     width: 1400,
     height: 933,
   } satisfies SiteImage,
   materials: {
     src: materialsDetail,
+    ...ph("materials-detail"),
     alt: "Buff brick, weathered timber cladding, a bronze window frame and a limestone sill meeting in low sunlight",
     width: 1120,
     height: 1400,
   } satisfies SiteImage,
   propertyModel: {
     src: propertyModel,
+    ...ph("property-model"),
     alt: "White card architectural model of a terrace of houses on a studio table with site plans and elevations",
     width: 1400,
     height: 933,
