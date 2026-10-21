@@ -13,7 +13,7 @@ export function SectionLabel({
   tone = "light",
   className,
 }: {
-  index?: string;
+  index?: string | undefined;
   children: ReactNode;
   tone?: "light" | "dark";
   className?: string;
@@ -22,12 +22,12 @@ export function SectionLabel({
     <div className={cn("flex items-center gap-4", className)}>
       {index && (
         <span
-          className={cn("numeral text-sm", tone === "light" ? "text-copper-deep" : "text-copper")}
+          className={cn("numeral text-sm", tone === "light" ? "text-copper-deep" : "text-gold")}
         >
           {index}
         </span>
       )}
-      <span className="h-px w-10 bg-copper" aria-hidden="true" />
+      <span className="h-px w-10 bg-copper shadow-[0_2px_0_var(--gold)]" aria-hidden="true" />
       <span
         className={cn("eyebrow", tone === "light" ? "text-on-light-muted" : "text-on-dark-muted")}
       >

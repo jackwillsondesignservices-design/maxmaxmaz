@@ -4,13 +4,14 @@ import { PageHero } from "@/components/site/PageHero";
 import { EditorialImage } from "@/components/site/EditorialImage";
 import { Reveal } from "@/components/site/Reveal";
 import { EnquiryBand, RelatedPages, SectionLabel, SourceLink } from "@/components/site/Editorial";
+import { InvestmentCriteria, RegenerationCase } from "@/components/site/InvestmentCriteria";
 import { images } from "@/lib/images";
 import { pageTitle } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const title = pageTitle("Property Investment & Development");
 const description =
-  "A considered approach to property investment and development: location, condition, use, constraints and long-term potential.";
+  "MDR Rent-Path invests in low-rise properties with start values up to £120,000, developing them into modern, sustainable rental homes. New build only where regeneration funding applies.";
 
 export const Route = createFileRoute("/property-investment-development")({
   head: () => ({
@@ -60,42 +61,53 @@ function PropertyPage() {
         image={images.development}
         index="I"
         label="Property investment & development"
-        title="See the potential in property."
-        intro="Explore property investment and development through a considered approach to buildings, opportunities and the built environment."
+        title="Low-rise property. Long-term value."
+        intro="We acquire low-rise properties with start values up to £120,000 and develop them into modern rental homes built for sustainable living."
       />
 
       {/* A. Understanding property */}
       <section className="section-y bg-limestone">
         <div className="container-editorial grid gap-12 md:grid-cols-12 md:gap-8">
           <Reveal className="md:col-span-5">
-            <SectionLabel index="01">Understanding property</SectionLabel>
-            <h2 className="display-2 mt-10 max-w-[12ch]">Every building tells you something.</h2>
+            <SectionLabel index="01">How we invest</SectionLabel>
+            <h2 className="display-2 mt-10 max-w-[12ch]">
+              Focused where the <em>returns are.</em>
+            </h2>
           </Reveal>
           <Reveal delay={150} className="space-y-6 md:col-span-6 md:col-start-7 md:pt-24">
             <p className="lede">
-              Looking carefully at a property means considering its condition, its location, how it
-              is intended to be used and the constraints that may affect it.
+              We target low-rise properties only, with start project values of £120,000 or less. In
+              our experience, projects much above that level attract little interest and deliver
+              little return as rental homes.
             </p>
             <p className="body-copy text-on-light-muted">
-              These are general considerations to help frame a more informed conversation. They are
-              not a valuation, survey or investment advice — every property decision depends on
-              individual circumstances and benefits from independent, qualified professional input.
+              We don’t pursue new builds unless there is a regeneration fund to tap into. Instead we
+              look for existing buildings with potential, improve them carefully and manage them as
+              long-term rental assets.
+            </p>
+            <p className="body-copy text-on-light-muted">
+              The information on this page describes our own approach. It is not a valuation, survey
+              or financial advice — every property decision depends on individual circumstances.
             </p>
           </Reveal>
         </div>
       </section>
 
+      <InvestmentCriteria index="02" />
+
+      <RegenerationCase index="03" />
+
       {/* B. Development perspective */}
       <section className="bg-mineral">
         <div className="grid md:grid-cols-12">
           <EditorialImage
-            image={images.retrofit}
+            image={images.docklands}
             className="aspect-[4/3] md:col-span-7 md:aspect-auto md:min-h-[42rem]"
             sizes="(min-width: 768px) 60vw, 100vw"
             parallax={5}
           />
           <Reveal className="container-editorial flex flex-col justify-center py-20 md:col-span-5 md:px-14 lg:px-20">
-            <SectionLabel index="02">A development perspective</SectionLabel>
+            <SectionLabel index="04">A development perspective</SectionLabel>
             <h2 className="display-2 mt-10 max-w-[12ch]">Design that lasts beyond the handover.</h2>
             <p className="body-copy mt-8 text-on-light-muted">
               Good design, everyday functionality, energy performance and long-term suitability all
@@ -114,7 +126,7 @@ function PropertyPage() {
         <div className="container-editorial">
           <div className="grid gap-12 md:grid-cols-12 md:gap-8">
             <Reveal className="md:col-span-4">
-              <SectionLabel index="03">What to consider</SectionLabel>
+              <SectionLabel index="05">What we assess</SectionLabel>
               <h2 className="display-2 mt-10 max-w-[10ch]">Six questions worth asking.</h2>
               <div className="mt-10 hidden md:block">
                 <EditorialImage
@@ -170,8 +182,8 @@ function PropertyPage() {
       </section>
 
       <EnquiryBand
-        title="Interested in property or development?"
-        copy="Share what you’re thinking about — a building, an area or a broader question — and start a conversation."
+        title="Have a low-rise property or project?"
+        copy="Tell us about the building, the area and the starting value. If it fits our criteria, we’ll be in touch."
       />
 
       <RelatedPages

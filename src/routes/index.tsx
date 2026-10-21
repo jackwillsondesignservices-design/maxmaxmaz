@@ -5,14 +5,14 @@ import { EditorialImage } from "@/components/site/EditorialImage";
 import { Reveal } from "@/components/site/Reveal";
 import { SplitWords } from "@/components/site/SplitWords";
 import { ArrowLink, ClosingCta, SectionLabel } from "@/components/site/Editorial";
+import { InvestmentCriteria, RegenerationCase } from "@/components/site/InvestmentCriteria";
 import { heroCaptions, heroFrames, images } from "@/lib/images";
 import { riseDelay } from "@/lib/motion";
 import { site, type NavItem } from "@/lib/site";
 import type { SiteImage } from "@/lib/images";
 
-const title = `${site.name} — Property, development and better living`;
-const description =
-  "Exploring property investment, thoughtful development, smarter home security and practical ways to make housing more efficient.";
+const title = `${site.name} — Modern rental spaces for a sustainable future`;
+const description = site.positioning;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,6 +45,8 @@ function HomePage() {
     <>
       <Hero />
       <BrandStatement />
+      <InvestmentCriteria index="02" />
+      <RegenerationCase index="03" />
       <FocusAreas />
       <PropertySection />
       <SecuritySection />
@@ -55,10 +57,10 @@ function HomePage() {
         image={images.bluehour}
         title={
           <>
-            Let’s look at property <em>differently.</em>
+            Let’s build <em>value together.</em>
           </>
         }
-        copy="Interested in property, home security, energy efficiency or the future of housing? Start a conversation."
+        copy="Selling a low-rise property, working on a regeneration scheme or looking to invest in modern rental homes? Start a conversation with MDR Rent-Path."
       />
     </>
   );
@@ -77,9 +79,9 @@ function Hero() {
       <div className="pointer-events-none absolute inset-x-0 top-28 hidden md:block">
         <div className="container-editorial flex justify-end">
           <div className="max-w-[22rem] text-right rise-in" style={riseDelay(1100)}>
-            <p className="eyebrow text-on-dark">Property / Development / Better living</p>
+            <p className="eyebrow text-on-dark">{site.editorialLine}</p>
             <p className="eyebrow mt-3 border-t border-rule-dark pt-3 text-on-dark-muted">
-              A more considered view of the built environment
+              Low-rise homes · start values up to £120,000
             </p>
           </div>
         </div>
@@ -87,37 +89,40 @@ function Hero() {
 
       <div className="container-editorial relative pb-10 pt-40 md:pb-14">
         <div className="mb-7 flex items-center gap-4 rise-in md:mb-9" style={riseDelay(120)}>
-          <span className="h-px w-10 bg-copper rule-draw" style={riseDelay(220)} />
-          <span className="eyebrow text-on-dark">Property, considered differently</span>
+          <span
+            className="h-px w-10 bg-copper shadow-[0_2px_0_var(--gold)] rule-draw"
+            style={riseDelay(220)}
+          />
+          <span className="eyebrow text-on-dark">{site.descriptor}</span>
         </div>
 
         <h1 className="display-hero text-luminous">
-          <span className="block md:whitespace-nowrap">
-            <SplitWords text="A better future," delay={200} step={90} />
+          <span className="block">
+            <SplitWords text="Modern rental spaces" delay={200} step={90} />
           </span>
-          <em className="block md:whitespace-nowrap">
-            <SplitWords text="built around property." delay={470} step={90} />
+          <em className="block">
+            <SplitWords text="for a sustainable future." delay={470} step={90} />
           </em>
         </h1>
 
         <div className="mt-8 grid gap-10 md:mt-11 md:grid-cols-12 md:items-end">
           <div className="md:col-span-7 lg:col-span-6">
             <p className="lede max-w-[33rem] text-on-dark-muted rise-in" style={riseDelay(900)}>
-              Exploring property investment, thoughtful development, smarter home security and
-              practical ways to make housing more efficient.
+              Developing communities, creating opportunity, building wealth. We turn low-rise
+              properties into well-designed, energy-conscious rental homes.
             </p>
             <div
               className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-5 rise-in"
               style={riseDelay(1050)}
             >
               <Link to="/contact" className="btn-hero">
-                <span className="relative">Start a conversation</span>
+                <span className="relative">Discuss a property</span>
                 <span className="arrow relative" aria-hidden="true">
                   →
                 </span>
               </Link>
               <a href="#approach" className="link-quiet text-on-dark">
-                Explore the approach{" "}
+                Our approach{" "}
                 <span className="arrow rotate-90" aria-hidden="true">
                   →
                 </span>
@@ -164,20 +169,17 @@ function BrandStatement() {
       <div className="container-editorial">
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <Reveal className="md:col-span-7">
-            <SectionLabel index="01">The approach</SectionLabel>
+            <SectionLabel index="01">Who we are</SectionLabel>
             <h2 className="display-1 mt-10 max-w-[12ch]">
-              Property is more than <em>an address.</em>
+              Rental homes that <em>grow value.</em>
             </h2>
           </Reveal>
           <Reveal delay={150} className="flex items-end md:col-span-4 md:col-start-9">
             <div>
-              <p className="lede text-charcoal">
-                It is an asset to understand, a place to protect and a home that can work better for
-                the people who live in it.
-              </p>
+              <p className="lede text-charcoal">{site.positioning}</p>
               <p className="body-copy mt-6 text-on-light-muted">
-                Four connected subjects — property, security, energy and sustainable housing —
-                explored with the same careful, practical eye.
+                Every home we take on is judged on four things: the property itself, how secure it
+                is, how efficiently it runs and how well it will serve residents for years to come.
               </p>
             </div>
           </Reveal>
@@ -213,7 +215,7 @@ const property: Focus = {
   to: "/property-investment-development",
   index: "I",
   title: "Property Investment & Development",
-  copy: "Understanding buildings as assets and opportunities — their condition, context and long-term potential.",
+  copy: "Low-rise buildings bought well, improved carefully and managed as long-term rental assets.",
   image: images.docklands,
 };
 const security: Focus = {
@@ -264,11 +266,11 @@ function FocusAreas() {
       <div className="container-editorial">
         <Reveal className="grid gap-8 md:grid-cols-12">
           <div className="md:col-span-6">
-            <SectionLabel index="02">Four areas of focus</SectionLabel>
+            <SectionLabel index="04">What we look at</SectionLabel>
           </div>
           <p className="lede md:col-span-5 md:col-start-8">
-            One coherent subject seen from four angles: how we invest in, protect, run and build the
-            places we live.
+            How we buy, protect, run and improve every rental home — so it works for residents and
+            holds its value over time.
           </p>
         </Reveal>
 
@@ -324,9 +326,9 @@ function FocusAreas() {
             className="group grid overflow-hidden bg-forest text-on-dark md:grid-cols-12"
           >
             <div className="flex flex-col justify-between gap-10 p-8 md:col-span-6 md:p-14 lg:p-20">
-              <span className="numeral text-lg text-copper">{sustainable.index}</span>
+              <span className="numeral text-lg text-gold">{sustainable.index}</span>
               <div>
-                <h3 className="display-2 transition-colors duration-300 group-hover:text-copper">
+                <h3 className="display-2 transition-colors duration-300 group-hover:text-gold">
                   {sustainable.title}
                 </h3>
                 <p className="body-copy mt-5 max-w-md text-on-dark-muted">{sustainable.copy}</p>
@@ -366,7 +368,7 @@ function PropertySection() {
         </div>
         <div className="container-editorial flex flex-col justify-center py-20 md:col-span-5 md:px-14 lg:px-20">
           <Reveal>
-            <SectionLabel index="03" tone="dark">
+            <SectionLabel index="05" tone="dark">
               Property & development
             </SectionLabel>
             <h2 className="display-1 mt-10 max-w-[10ch]">
@@ -375,9 +377,8 @@ function PropertySection() {
           </Reveal>
           <Reveal delay={150}>
             <p className="lede mt-8 max-w-md text-on-dark-muted">
-              Explore the thinking behind property investment and development, from understanding
-              the potential of a building to considering how spaces can serve people and communities
-              over time.
+              We look for low-rise properties with real potential, then refurbish and improve them
+              into modern rental homes that serve residents and the wider community for decades.
             </p>
             <ArrowLink to="/property-investment-development" className="mt-10 text-on-dark">
               Property investment & development
@@ -395,7 +396,7 @@ function SecuritySection() {
     <section className="section-y bg-limestone">
       <div className="container-editorial grid gap-12 md:grid-cols-12 md:gap-8">
         <Reveal className="order-2 flex flex-col justify-between md:order-1 md:col-span-5">
-          <SectionLabel index="04">Home security</SectionLabel>
+          <SectionLabel index="06">Home security</SectionLabel>
           <div className="mt-10 md:mt-0">
             <h2 className="display-1 max-w-[11ch]">
               Feel at home <em>in your home.</em>
@@ -439,7 +440,7 @@ function EnergySection() {
     <section className="bg-pine text-on-dark">
       <div className="grid md:grid-cols-2">
         <Reveal className="container-editorial flex flex-col justify-center py-20 md:order-2 md:px-14 md:py-28 lg:px-20">
-          <SectionLabel index="05" tone="dark">
+          <SectionLabel index="07" tone="dark">
             Energy saving
           </SectionLabel>
           <h2 className="display-1 mt-10 max-w-[11ch]">
@@ -471,7 +472,7 @@ function SustainableSection() {
       <div className="container-editorial">
         <div className="grid gap-10 md:grid-cols-12">
           <Reveal className="md:col-span-6">
-            <SectionLabel index="06">Sustainable housing</SectionLabel>
+            <SectionLabel index="08">Sustainable housing</SectionLabel>
             <h2 className="display-1 mt-10 max-w-[10ch]">
               Better homes. <em>Better choices.</em>
             </h2>
@@ -542,14 +543,14 @@ function Journal() {
       <div className="container-editorial">
         <Reveal className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
-            <SectionLabel index="07">Journal — forthcoming</SectionLabel>
+            <SectionLabel index="09">Insights — forthcoming</SectionLabel>
             <h2 className="display-1 mt-10 max-w-[13ch]">
-              Ideas for a <em>better-built future.</em>
+              Insight for <em>investors &amp; residents.</em>
             </h2>
           </div>
           <p className="body-copy max-w-sm text-on-light-muted">
-            Planned article concepts. Full articles are in preparation — in the meantime, each links
-            to the related guide on this site.
+            Planned articles from the MDR Rent-Path team. Full pieces are in preparation — in the
+            meantime, each links to the related guide on this site.
           </p>
         </Reveal>
 

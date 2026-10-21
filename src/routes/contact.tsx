@@ -5,11 +5,11 @@ import { SectionLabel } from "@/components/site/Editorial";
 import { images } from "@/lib/images";
 import { riseDelay } from "@/lib/motion";
 import { SplitWords } from "@/components/site/SplitWords";
-import { pageTitle } from "@/lib/site";
+import { pageTitle, site } from "@/lib/site";
 
 const title = pageTitle("Contact");
 const description =
-  "Have a question about property, home security, energy saving or sustainable housing? Start a conversation.";
+  "Contact MDR Rent-Path Ltd about low-rise property opportunities, regeneration projects or investing in modern, sustainable rental homes.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -40,7 +40,7 @@ function ContactPage() {
           <div className="absolute inset-0 -z-10 scrim-bottom" />
           <div className="w-full px-[clamp(1.25rem,4vw,4rem)] pb-12 pt-36 lg:pb-16">
             <div className="mb-8 flex items-center gap-4 rise-in" style={riseDelay(100)}>
-              <span className="h-px w-10 bg-copper" />
+              <span className="h-px w-10 bg-copper shadow-[0_2px_0_var(--gold)]" />
               <span className="eyebrow text-on-dark-muted">Contact</span>
             </div>
             <h1 className="display-1 max-w-[10ch] text-luminous lg:text-[clamp(2.75rem,4.6vw,5rem)]">
@@ -50,8 +50,8 @@ function ContactPage() {
               </em>
             </h1>
             <p className="lede mt-6 max-w-md text-on-dark-muted rise-in" style={riseDelay(360)}>
-              Have a question about property, home security, energy saving or sustainable housing?
-              Get in touch.
+              Selling a low-rise property, working on a regeneration scheme or interested in
+              investing alongside us? Get in touch.
             </p>
           </div>
         </div>
@@ -61,9 +61,33 @@ function ContactPage() {
           <div className="w-full max-w-2xl lg:mx-auto">
             <SectionLabel>Send an enquiry</SectionLabel>
             <p className="body-copy mt-6 max-w-lg text-on-light-muted">
-              Share a little about your question and the best way to reach you. Enquiries are stored
-              securely and read by the site owner.
+              Share a little about the property or project and the best way to reach you. Enquiries
+              are stored securely and read by {site.contact.person}, {site.contact.role}.
             </p>
+            <dl className="mt-8 grid gap-6 border-y border-rule-light py-6 sm:grid-cols-2">
+              <div>
+                <dt className="eyebrow text-on-light-muted">Email</dt>
+                <dd className="mt-2">
+                  <a
+                    href={`mailto:${site.contact.email}`}
+                    className="text-charcoal underline decoration-copper decoration-1 underline-offset-4 transition-colors hover:text-copper-deep"
+                  >
+                    {site.contact.email}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="eyebrow text-on-light-muted">Website</dt>
+                <dd className="mt-2">
+                  <a
+                    href={site.contact.websiteUrl}
+                    className="text-charcoal underline decoration-gold decoration-1 underline-offset-4 transition-colors hover:text-copper-deep"
+                  >
+                    {site.contact.website}
+                  </a>
+                </dd>
+              </div>
+            </dl>
             <div className="mt-12">
               <ContactForm />
             </div>

@@ -220,7 +220,7 @@ function SustainablePage() {
                   key={h}
                   className="grid grid-cols-[3rem_1fr] gap-4 border-b border-rule-dark py-7"
                 >
-                  <span className="numeral text-copper">0{i + 1}</span>
+                  <span className="numeral text-gold">0{i + 1}</span>
                   <div>
                     <h3 className="font-display text-2xl">{h}</h3>
                     <p className="body-copy mt-2 text-on-dark-muted">{b}</p>

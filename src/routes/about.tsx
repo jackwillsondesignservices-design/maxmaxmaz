@@ -4,11 +4,11 @@ import { EditorialImage } from "@/components/site/EditorialImage";
 import { Reveal } from "@/components/site/Reveal";
 import { ArrowLink, SectionLabel } from "@/components/site/Editorial";
 import { images, type SiteImage } from "@/lib/images";
-import { pageTitle, type NavItem } from "@/lib/site";
+import { pageTitle, site, type NavItem } from "@/lib/site";
 
 const title = pageTitle("About");
 const description =
-  "Bringing together property, residential security, energy efficiency and sustainable housing to encourage more considered decisions about where we live and invest.";
+  "MDR Rent-Path Ltd is a property development and asset management company creating modern rental spaces for sustainable living, thriving communities and long-term wealth creation.";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -24,9 +24,8 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-/** Editable positioning copy — update when the client confirms his business details. */
-const intro =
-  "This website brings together four closely connected areas of interest: property, residential security, energy efficiency and sustainable housing. The aim is to make useful information easier to explore and encourage more considered decisions about the places we live and invest in.";
+/** Brand positioning statement — lives in src/lib/site.ts. */
+const intro = site.positioning;
 
 const themes: { to: NavItem["to"]; longLabel: string; note: string; image: SiteImage }[] = [
   {
@@ -61,17 +60,29 @@ function AboutPage() {
       <PageHero
         image={images.timber}
         label="About"
-        title="A more considered view of property."
+        title="Building value. Sustaining communities."
         height="medium"
       />
 
       <section className="section-y bg-limestone">
         <div className="container-editorial grid gap-12 md:grid-cols-12">
           <Reveal className="md:col-span-3">
-            <SectionLabel index="01">Scope</SectionLabel>
+            <SectionLabel index="01">Positioning</SectionLabel>
           </Reveal>
           <Reveal delay={100} className="md:col-span-8 md:col-start-5">
-            <p className="font-display text-[clamp(1.75rem,3.2vw,3rem)] leading-[1.15]">{intro}</p>
+            <p className="font-display text-[clamp(1.5rem,2.6vw,2.5rem)] leading-[1.25] tracking-[-0.02em]">
+              {intro}
+            </p>
+            <div className="mt-12 flex items-center gap-5 border-t border-rule-light pt-8">
+              <span
+                className="h-0.5 w-10 bg-copper shadow-[0_2px_0_var(--gold)]"
+                aria-hidden="true"
+              />
+              <p className="body-copy">
+                <span className="font-semibold text-charcoal">{site.contact.person}</span>
+                <span className="text-on-light-muted"> — {site.contact.role}</span>
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -79,7 +90,7 @@ function AboutPage() {
       <section className="section-y-sm bg-mineral">
         <div className="container-editorial">
           <Reveal>
-            <SectionLabel index="02">Four connected themes</SectionLabel>
+            <SectionLabel index="02">What we focus on</SectionLabel>
           </Reveal>
           <ul className="mt-12 border-t border-rule-light">
             {themes.map((t, i) => (
@@ -111,17 +122,24 @@ function AboutPage() {
             />
           </Reveal>
           <Reveal delay={150} className="flex flex-col justify-center md:col-span-5 md:col-start-8">
-            <SectionLabel index="03">Principles</SectionLabel>
+            <SectionLabel index="03">What we stand for</SectionLabel>
             <ul className="mt-10 space-y-8">
               {[
                 [
-                  "Clarity over hype",
-                  "Information is kept general, accurate and free of exaggerated claims.",
+                  "Growth & urban renewal",
+                  "Entrepreneurial development that brings tired buildings back into good use.",
                 ],
-                ["Practical first", "Ideas are framed around real homes and everyday decisions."],
                 [
-                  "Professional where it matters",
-                  "Where work or advice needs a qualified professional, that is made clear.",
+                  "Sustainability & community wellbeing",
+                  "Long-term thinking about energy, materials and the people who live nearby.",
+                ],
+                [
+                  "Wealth creation for all",
+                  "Homes that hold their value, with returns shared across residents and investors.",
+                ],
+                [
+                  "Strength, stability, trust",
+                  "Professional, straightforward management from acquisition to letting.",
                 ],
               ].map(([h, b]) => (
                 <li key={h}>
@@ -137,7 +155,9 @@ function AboutPage() {
       <section className="bg-forest text-on-dark">
         <div className="container-editorial flex flex-col items-start gap-8 py-20 md:flex-row md:items-end md:justify-between md:py-24">
           <Reveal>
-            <h2 className="display-2 max-w-[16ch]">Have a question? It’s a good place to start.</h2>
+            <h2 className="display-2 max-w-[16ch]">
+              Have a property that fits? <em>Let’s talk.</em>
+            </h2>
           </Reveal>
           <Reveal delay={120}>
             <ArrowLink to="/contact" className="text-on-dark">

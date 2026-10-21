@@ -3,21 +3,13 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { allPages, primaryNav, site } from "@/lib/site";
 import { warmPageImage } from "@/lib/images";
 import { cn } from "@/lib/utils";
+import { Logo } from "./Logo";
 
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
+/** Header/footer brand mark — the MDR Rent-Path logo, coloured by the surrounding text colour. */
 export function Wordmark({ className }: { className?: string }) {
-  return (
-    <span className={cn("inline-flex items-center gap-3", className)}>
-      <span aria-hidden="true" className="relative block h-5 w-5">
-        <span className="absolute inset-x-0 bottom-0 h-px bg-current" />
-        <span className="absolute bottom-0 left-0 h-full w-px bg-current" />
-        <span className="absolute bottom-0 left-[45%] h-[62%] w-px bg-copper" />
-        <span className="absolute bottom-0 right-0 h-[35%] w-px bg-current" />
-      </span>
-      <span className="text-[0.78rem] font-bold tracking-[0.28em]">{site.wordmark}</span>
-    </span>
-  );
+  return <Logo decorative className={cn("w-[8.5rem] md:w-[10rem]", className)} />;
 }
 
 /** Primary links with one copper rule that glides to whichever link is hovered, resting on the current page. */
@@ -195,7 +187,7 @@ export function SiteHeader() {
             >
               <span
                 aria-hidden="true"
-                className="absolute inset-0 origin-bottom scale-y-0 bg-copper transition-transform duration-500 ease-[var(--ease-cinematic)] group-hover:scale-y-100"
+                className="absolute inset-0 origin-bottom scale-y-0 bg-copper-deep transition-transform duration-500 ease-[var(--ease-cinematic)] group-hover:scale-y-100"
               />
               <span className="relative">Contact</span>
             </Link>
@@ -250,7 +242,7 @@ export function SiteHeader() {
                     tabIndex={open ? 0 : -1}
                     onTouchStart={() => warmPageImage(item.to)}
                     className={cn(
-                      "group flex items-baseline justify-between gap-4 py-4 font-display text-[clamp(1.75rem,7vw,2.75rem)] leading-tight transition-[color,transform,opacity] duration-700 ease-[var(--ease-cinematic)] hover:text-copper data-[status=active]:text-copper",
+                      "group flex items-baseline justify-between gap-4 py-4 font-display text-[clamp(1.75rem,7vw,2.75rem)] leading-tight transition-[color,transform,opacity] duration-700 ease-[var(--ease-cinematic)] hover:text-gold data-[status=active]:text-gold",
                       open ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
                     )}
                     style={{ transitionDelay: open ? `${180 + i * 55}ms` : "0ms" }}

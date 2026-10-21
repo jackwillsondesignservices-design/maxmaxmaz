@@ -11,7 +11,11 @@
 
 # Project rules
 
-- Brand name, wordmark and nav live only in `src/lib/site.ts`; never hardcode the brand name in components — the name is a temporary concept and must be swappable from one place.
+- Brand name, descriptor, positioning, contact details and nav live only in `src/lib/site.ts` (brand: MDR Rent-Path Ltd); never hardcode them in components.
+- The logo is the traced SVG in `src/components/site/Logo.tsx` (letterforms use `currentColor`, road dashes stay grey); downloadable colourways live in `public/brand/`.
+- Brand colours: Burnt Orange #C65A1E (`copper`), Olive #6B7A3D (`olive`, deep band `pine`), Heritage Gold #C9A227 (`gold`), Carbon Black #111111 (`forest`/`charcoal`), Soft Ivory #F8F6F0 (`limestone`). On dark grounds use gold for small accent text; orange text on ivory uses `copper-deep`.
+- Investment criteria (low-rise only, start values up to £120,000, new build only with regeneration funding) live in `src/components/site/InvestmentCriteria.tsx`.
+- Fonts: the brand face "MDR Biome" is listed first in the font stacks; Sora (headings) and Manrope (body) are stand-ins until licensed web font files are supplied.
 - All imagery is registered in `src/lib/images.ts` (alt text, dimensions, focal positions); components receive `SiteImage` objects so crops and sources stay consistent and replaceable.
 - Remote photos are verified Unsplash `images.unsplash.com/photo-…` IDs only; never guess IDs — download and visually check any new one first.
 - Colours, type scale, link styles and motion are design-system utilities in `src/styles.css`; components use those tokens, never raw colour values.

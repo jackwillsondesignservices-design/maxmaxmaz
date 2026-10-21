@@ -85,8 +85,11 @@ export function PageHero({
 
       <div className="container-editorial relative pb-14 pt-36 md:pb-20">
         <div className="mb-8 flex items-center gap-4 rise-in" style={riseDelay(100)}>
-          {index && <span className="numeral text-sm text-copper">{index}</span>}
-          <span className="h-px w-10 bg-copper rule-draw" style={riseDelay(200)} />
+          {index && <span className="numeral text-sm text-gold">{index}</span>}
+          <span
+            className="h-px w-10 bg-copper shadow-[0_2px_0_var(--gold)] rule-draw"
+            style={riseDelay(200)}
+          />
           <span className="eyebrow text-on-dark-muted">{label}</span>
         </div>
         <h1 className="display-1 max-w-[14ch] text-luminous">

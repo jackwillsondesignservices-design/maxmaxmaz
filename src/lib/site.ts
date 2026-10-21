@@ -1,13 +1,25 @@
 /**
- * Single configuration point for the temporary concept brand.
- * "THE BUILT FUTURE" is a working concept name only — replace `name`
- * here when the client confirms his business name and it updates everywhere.
+ * Single configuration point for the brand.
+ * Name, strapline, positioning and contact details live here only — components read from this object.
  */
 export const site = {
-  name: "The Built Future",
-  wordmark: "THE BUILT FUTURE",
-  shortStatement: "A considered view of property, home security, energy and the future of housing.",
-  editorialLine: "Property / Security / Energy / Housing",
+  name: "MDR Rent-Path Ltd",
+  wordmark: "MDR RENT-PATH",
+  descriptor: "Property Development & Asset Management",
+  shortStatement:
+    "Modern rental spaces for a sustainable future — developing communities, creating opportunity, building wealth.",
+  positioning:
+    "MDR Rent-Path Ltd develops contemporary rental spaces designed for sustainable living, thriving communities, and long-term wealth creation. Through responsible development, innovative design, and strategic investment, we create environments where residents flourish and value grows for all stakeholders.",
+  mission:
+    "Creating modern rental spaces that inspire sustainable living and generate wealth for all.",
+  editorialLine: "Develop / Sustain / Invest / Grow",
+  contact: {
+    person: "Max Clarke",
+    role: "Founder and Director",
+    email: "info@mdrrentpath.co.uk",
+    website: "www.mdrrentpath.co.uk",
+    websiteUrl: "https://www.mdrrentpath.co.uk",
+  },
 } as const;
 
 export type NavItem = {

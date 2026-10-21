@@ -21,7 +21,7 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center bg-forest px-4 text-on-dark">
       <div className="container-editorial">
-        <p className="eyebrow text-copper">404 — Not found</p>
+        <p className="eyebrow text-gold">404 — Not found</p>
         <h1 className="display-1 mt-6 max-w-[14ch]">This page isn’t part of the plan.</h1>
         <p className="lede mt-6 max-w-md text-on-dark-muted">
           The page you’re looking for doesn’t exist or has moved.
@@ -75,7 +75,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "theme-color", content: "#18251F" },
+      { name: "theme-color", content: "#111111" },
       { title: site.name },
       { name: "description", content: site.shortStatement },
       { property: "og:site_name", content: site.name },
@@ -87,11 +87,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap",
       },
       { rel: "preconnect", href: "https://images.unsplash.com" },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
     scripts: [
       {

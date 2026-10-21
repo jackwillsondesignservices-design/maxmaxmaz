@@ -73,8 +73,8 @@ export function ContactForm() {
         <p className="eyebrow text-copper-deep">Message received</p>
         <h2 className="display-3 mt-4">Thank you — your enquiry has been saved.</h2>
         <p className="body-copy mt-4 max-w-md text-on-light-muted">
-          It has been recorded securely and will be read by the site owner. Replies are sent to the
-          email address you provided.
+          It has been recorded securely and will be read by the MDR Rent-Path team. Replies are sent
+          to the email address you provided.
         </p>
         <button type="button" onClick={() => setStatus("idle")} className="link-quiet mt-8">
           Send another message
@@ -189,7 +189,7 @@ export function ContactForm() {
           type="submit"
           disabled={submitting}
           aria-busy={submitting}
-          className="inline-flex min-h-12 items-center justify-center gap-3 bg-forest px-8 py-3 text-[0.75rem] font-semibold tracking-[0.22em] text-on-dark uppercase transition-colors duration-300 hover:bg-copper disabled:cursor-wait disabled:opacity-70"
+          className="inline-flex min-h-12 items-center justify-center gap-3 bg-forest px-8 py-3 text-[0.75rem] font-semibold tracking-[0.22em] text-on-dark uppercase transition-colors duration-300 hover:bg-copper-deep disabled:cursor-wait disabled:opacity-70"
         >
           {submitting ? (
             <>

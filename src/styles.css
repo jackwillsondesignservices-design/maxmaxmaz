@@ -5,15 +5,18 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * THE BUILT FUTURE — design system
- * Architectural material palette: midnight forest, deep pine, warm limestone,
- * pale mineral, muted sage, brushed copper, architectural charcoal.
+ * MDR RENT-PATH LTD — design system
+ * Brand colour system: Burnt Orange (primary), Olive Green (secondary),
+ * Heritage Gold (accent), Carbon Black (foundation), Soft Ivory (background).
+ * Token names are kept from the original system (forest = carbon grounds,
+ * pine = deep olive bands, copper = burnt orange) so components stay unchanged.
  * All colours are oklch. Components must only use these semantic tokens.
  */
 
 @theme inline {
-  --font-display: "DM Serif Display", ui-serif, Georgia, serif;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  /* Stand-ins for MDR Biome Bold / Regular until licensed web font files are supplied */
+  --font-display: "MDR Biome", "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "MDR Biome", "Manrope", ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
@@ -49,6 +52,8 @@
   --color-sage: var(--sage);
   --color-copper: var(--copper);
   --color-copper-deep: var(--copper-deep);
+  --color-olive: var(--olive);
+  --color-gold: var(--gold);
   --color-charcoal: var(--charcoal);
   --color-paper: var(--paper);
   --color-on-dark: var(--on-dark);
@@ -78,22 +83,28 @@
 :root {
   --radius: 2px;
 
-  /* Material palette */
-  --forest: oklch(0.25 0.021 164.6); /* #18251F midnight forest */
-  --pine: oklch(0.328 0.031 162.3); /* #263A30 deep pine */
-  --limestone: oklch(0.946 0.014 88.7); /* #F1EDE3 warm limestone */
-  --mineral: oklch(0.901 0.015 90.2); /* #E2DED3 pale mineral */
-  --sage: oklch(0.725 0.028 131); /* #A0AA98 muted sage */
-  --copper: oklch(0.633 0.089 54.1); /* #B47B55 brushed copper */
-  --copper-deep: oklch(0.5 0.085 52); /* copper for small text on light grounds */
-  --charcoal: oklch(0.28 0.008 153.4); /* #262A27 architectural charcoal */
+  /* MDR Rent-Path brand palette */
+  --forest: oklch(0.178 0 0); /* #111111 Carbon Black — dark grounds */
+  --pine: oklch(
+    0.341 0.05 119.6
+  ); /* #353C1D deep Olive — olive bands; keeps ivory, muted and gold text readable */
+  --olive: oklch(0.553 0.087 120.7); /* #6B7A3D Olive Green (secondary) */
+  --limestone: oklch(0.973 0.008 91.5); /* #F8F6F0 Soft Ivory (background) */
+  --mineral: oklch(0.94 0.014 88.7); /* #EFEBE1 deeper ivory for alternate sections */
+  --sage: oklch(0.777 0.062 117.1); /* #B3BC8F light olive for quiet labels on dark */
+  --copper: oklch(0.594 0.154 45.3); /* #C65A1E Burnt Orange (primary) */
+  --copper-deep: oklch(
+    0.524 0.138 45.2
+  ); /* #A84A15 burnt orange for small text / fills under ivory text */
+  --gold: oklch(0.728 0.138 89.7); /* #C9A227 Heritage Gold (accent) */
+  --charcoal: oklch(0.178 0 0); /* #111111 Carbon Black — text */
   --paper: oklch(1 0 0); /* pure white */
 
-  --on-dark: oklch(0.97 0.01 88);
-  --on-dark-muted: oklch(0.83 0.015 110);
-  --on-light-muted: oklch(0.42 0.012 150);
-  --rule-dark: oklch(0.97 0.01 88 / 18%);
-  --rule-light: oklch(0.28 0.008 153.4 / 16%);
+  --on-dark: oklch(0.973 0.008 91.5);
+  --on-dark-muted: oklch(0.843 0.014 88.7);
+  --on-light-muted: oklch(0.444 0.012 81.8);
+  --rule-dark: oklch(0.973 0.008 91.5 / 18%);
+  --rule-light: oklch(0.178 0 0 / 14%);
 
   /* shadcn semantic mapping */
   --background: var(--limestone);
@@ -134,38 +145,38 @@
   --gradient-hero:
     linear-gradient(
       90deg,
-      oklch(0.2 0.02 164 / 78%) 0%,
-      oklch(0.2 0.02 164 / 45%) 38%,
-      oklch(0.2 0.02 164 / 0%) 70%
+      oklch(0.17 0 0 / 78%) 0%,
+      oklch(0.17 0 0 / 45%) 38%,
+      oklch(0.17 0 0 / 0%) 70%
     ),
-    linear-gradient(0deg, oklch(0.18 0.02 164 / 80%) 0%, oklch(0.18 0.02 164 / 0%) 55%),
-    linear-gradient(180deg, oklch(0.18 0.02 164 / 45%) 0%, oklch(0.18 0.02 164 / 0%) 22%);
+    linear-gradient(0deg, oklch(0.16 0 0 / 80%) 0%, oklch(0.16 0 0 / 0%) 55%),
+    linear-gradient(180deg, oklch(0.16 0 0 / 45%) 0%, oklch(0.16 0 0 / 0%) 22%);
   --gradient-hero-mobile:
     linear-gradient(
       0deg,
-      oklch(0.18 0.02 164 / 94%) 0%,
-      oklch(0.18 0.02 164 / 74%) 42%,
-      oklch(0.18 0.02 164 / 38%) 66%,
-      oklch(0.18 0.02 164 / 8%) 86%
+      oklch(0.16 0 0 / 94%) 0%,
+      oklch(0.16 0 0 / 74%) 42%,
+      oklch(0.16 0 0 / 38%) 66%,
+      oklch(0.16 0 0 / 8%) 86%
     ),
-    linear-gradient(180deg, oklch(0.18 0.02 164 / 55%) 0%, oklch(0.18 0.02 164 / 0%) 25%);
+    linear-gradient(180deg, oklch(0.16 0 0 / 55%) 0%, oklch(0.16 0 0 / 0%) 25%);
   --gradient-scrim: linear-gradient(
     0deg,
-    oklch(0.18 0.02 164 / 85%) 0%,
-    oklch(0.18 0.02 164 / 20%) 60%,
-    oklch(0.18 0.02 164 / 35%) 100%
+    oklch(0.16 0 0 / 85%) 0%,
+    oklch(0.16 0 0 / 20%) 60%,
+    oklch(0.16 0 0 / 35%) 100%
   );
   --gradient-cta: linear-gradient(
     90deg,
-    oklch(0.2 0.02 164 / 88%) 0%,
-    oklch(0.2 0.02 164 / 55%) 55%,
-    oklch(0.2 0.02 164 / 25%) 100%
+    oklch(0.17 0 0 / 88%) 0%,
+    oklch(0.17 0 0 / 55%) 55%,
+    oklch(0.17 0 0 / 25%) 100%
   );
 
   --gradient-vignette: radial-gradient(
     130% 95% at 50% 38%,
-    oklch(0.18 0.02 164 / 0%) 55%,
-    oklch(0.16 0.02 164 / 55%) 100%
+    oklch(0.16 0 0 / 0%) 55%,
+    oklch(0.15 0 0 / 55%) 100%
   );
   /* Display lettering lit like the photographs: cool limestone at the cap height, warm evening light at the baseline */
   --gradient-luminous: linear-gradient(
@@ -174,13 +185,14 @@
     oklch(0.965 0.014 86) 45%,
     oklch(0.9 0.035 74) 100%
   );
+  /* Second headline line picks up Heritage Gold */
   --gradient-luminous-warm: linear-gradient(
     180deg,
-    oklch(0.975 0.014 84) 0%,
-    oklch(0.94 0.026 78) 45%,
-    oklch(0.86 0.05 66) 100%
+    oklch(0.9 0.09 90) 0%,
+    oklch(0.82 0.13 88) 50%,
+    oklch(0.74 0.14 82) 100%
   );
-  --shadow-letter: drop-shadow(0 0.04em 0.35em oklch(0.16 0.02 164 / 45%));
+  --shadow-letter: drop-shadow(0 0.04em 0.35em oklch(0.15 0 0 / 45%));
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 
   --duration-fade: 750ms;
@@ -209,7 +221,7 @@
   }
 
   ::selection {
-    background: var(--copper);
+    background: var(--copper-deep);
     color: var(--paper);
   }
 
@@ -223,18 +235,23 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.01em;
+    font-weight: 600;
+    letter-spacing: -0.02em;
     text-wrap: balance;
     font-kerning: normal;
     font-synthesis: none;
   }
 
+  /* Emphasised headline words carry the brand orange rather than italics */
   h1 em,
   h2 em,
   h3 em {
-    font-style: italic;
-    letter-spacing: -0.005em;
+    font-style: normal;
+    color: var(--copper-deep);
+  }
+  .text-on-dark :is(h1, h2, h3) em,
+  :is(h1, h2, h3).text-on-dark em {
+    color: var(--copper);
   }
 
   p,
@@ -280,30 +297,34 @@
 /* ---------- Typography ---------- */
 @utility display-hero {
   font-family: var(--font-display);
-  font-size: clamp(2.9rem, 7.8vw, 8.75rem);
-  line-height: 0.9;
-  letter-spacing: -0.032em;
+  font-weight: 600;
+  font-size: clamp(2.45rem, 6vw, 6.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
 }
 
 @utility display-1 {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6.2vw, 6.25rem);
-  line-height: 0.96;
-  letter-spacing: -0.026em;
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4.8vw, 4.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
 }
 
 @utility display-2 {
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 4.4vw, 4.4rem);
-  line-height: 1;
-  letter-spacing: -0.022em;
+  font-weight: 600;
+  font-size: clamp(1.85rem, 3.4vw, 3.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
 }
 
 @utility display-3 {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 2.5vw, 2.5rem);
-  line-height: 1.08;
-  letter-spacing: -0.015em;
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2vw, 2.05rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 @utility eyebrow {
@@ -393,9 +414,10 @@
   position: absolute;
   left: 0;
   bottom: 0.2rem;
-  height: 1px;
+  height: 2px;
   width: 1px;
   background: var(--copper);
+  box-shadow: 0 2px 0 var(--gold);
   transform-origin: left;
   pointer-events: none;
   transition:
@@ -635,7 +657,7 @@
   overflow: hidden;
   padding: 1.05rem 1.6rem;
   background: var(--limestone);
-  color: var(--forest);
+  color: var(--charcoal);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -645,7 +667,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: var(--copper);
+    background: var(--copper-deep);
     transform: scaleY(0);
     transform-origin: bottom;
     transition: transform 600ms var(--ease-cinematic);
@@ -701,7 +723,7 @@
     top: 0;
     width: 1px;
     height: 40%;
-    background: var(--copper);
+    background: var(--gold);
     animation: scroll-cue 2400ms var(--ease-cinematic) infinite;
   }
 }

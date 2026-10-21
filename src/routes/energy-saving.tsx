@@ -114,7 +114,7 @@ function EnergyPage() {
             {areas.map((a, i) => (
               <Reveal key={a.title} delay={(i % 2) * 100}>
                 <article className="grid grid-cols-[3.5rem_1fr] gap-4 border-t border-rule-dark py-10">
-                  <span className="numeral text-3xl text-copper">
+                  <span className="numeral text-3xl text-gold">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
