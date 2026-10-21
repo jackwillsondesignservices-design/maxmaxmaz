@@ -1,5 +1,4 @@
 import { useRef, useState, type FormEvent, type ReactNode } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import {
   enquiryTopics,
   validateEnquiry,
@@ -43,6 +42,8 @@ export function ContactForm() {
 
     inFlight.current = true;
     setStatus("submitting");
+    // Loaded on demand so the database client never weighs down page loads.
+    const { supabase } = await import("@/integrations/supabase/client");
     const { error } = await supabase.from("enquiries").insert(result.data);
     inFlight.current = false;
 
