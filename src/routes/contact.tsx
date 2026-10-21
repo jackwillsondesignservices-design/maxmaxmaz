@@ -4,6 +4,7 @@ import { EditorialImage } from "@/components/site/EditorialImage";
 import { SectionLabel } from "@/components/site/Editorial";
 import { images } from "@/lib/images";
 import { riseDelay } from "@/lib/motion";
+import { SplitWords } from "@/components/site/SplitWords";
 import { pageTitle } from "@/lib/site";
 
 const title = pageTitle("Contact");
@@ -37,8 +38,11 @@ function ContactPage() {
               <span className="h-px w-10 bg-copper" />
               <span className="eyebrow text-on-dark-muted">Contact</span>
             </div>
-            <h1 className="display-1 max-w-[10ch] rise-in lg:text-[clamp(2.75rem,4.6vw,5rem)]" style={riseDelay(180)}>
-              Start a conversation.
+            <h1 className="display-1 max-w-[10ch] text-luminous lg:text-[clamp(2.75rem,4.6vw,5rem)]">
+              <SplitWords text="Start a" delay={200} step={80} />{" "}
+              <em>
+                <SplitWords text="conversation." delay={360} />
+              </em>
             </h1>
             <p className="lede mt-6 max-w-md text-on-dark-muted rise-in" style={riseDelay(360)}>
               Have a question about property, home security, energy saving or sustainable housing? Get in touch.
