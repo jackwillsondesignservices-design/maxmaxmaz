@@ -10,33 +10,129 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EnergySavingRouteImport } from './routes/energy-saving'
+import { Route as HomeSecurityRouteImport } from './routes/home-security'
+import { Route as PropertyInvestmentDevelopmentRouteImport } from './routes/property-investment-development'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SustainableHousingRouteImport } from './routes/sustainable-housing'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnergySavingRoute = EnergySavingRouteImport.update({
+  id: '/energy-saving',
+  path: '/energy-saving',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeSecurityRoute = HomeSecurityRouteImport.update({
+  id: '/home-security',
+  path: '/home-security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PropertyInvestmentDevelopmentRoute =
+  PropertyInvestmentDevelopmentRouteImport.update({
+    id: '/property-investment-development',
+    path: '/property-investment-development',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SustainableHousingRoute = SustainableHousingRouteImport.update({
+  id: '/sustainable-housing',
+  path: '/sustainable-housing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/energy-saving': typeof EnergySavingRoute
+  '/home-security': typeof HomeSecurityRoute
+  '/property-investment-development': typeof PropertyInvestmentDevelopmentRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sustainable-housing': typeof SustainableHousingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/energy-saving': typeof EnergySavingRoute
+  '/home-security': typeof HomeSecurityRoute
+  '/property-investment-development': typeof PropertyInvestmentDevelopmentRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sustainable-housing': typeof SustainableHousingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/energy-saving': typeof EnergySavingRoute
+  '/home-security': typeof HomeSecurityRoute
+  '/property-investment-development': typeof PropertyInvestmentDevelopmentRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sustainable-housing': typeof SustainableHousingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/energy-saving'
+    | '/home-security'
+    | '/property-investment-development'
+    | '/sitemap.xml'
+    | '/sustainable-housing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/energy-saving'
+    | '/home-security'
+    | '/property-investment-development'
+    | '/sitemap.xml'
+    | '/sustainable-housing'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/energy-saving'
+    | '/home-security'
+    | '/property-investment-development'
+    | '/sitemap.xml'
+    | '/sustainable-housing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  EnergySavingRoute: typeof EnergySavingRoute
+  HomeSecurityRoute: typeof HomeSecurityRoute
+  PropertyInvestmentDevelopmentRoute: typeof PropertyInvestmentDevelopmentRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SustainableHousingRoute: typeof SustainableHousingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +144,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/energy-saving': {
+      id: '/energy-saving'
+      path: '/energy-saving'
+      fullPath: '/energy-saving'
+      preLoaderRoute: typeof EnergySavingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home-security': {
+      id: '/home-security'
+      path: '/home-security'
+      fullPath: '/home-security'
+      preLoaderRoute: typeof HomeSecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/property-investment-development': {
+      id: '/property-investment-development'
+      path: '/property-investment-development'
+      fullPath: '/property-investment-development'
+      preLoaderRoute: typeof PropertyInvestmentDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sustainable-housing': {
+      id: '/sustainable-housing'
+      path: '/sustainable-housing'
+      fullPath: '/sustainable-housing'
+      preLoaderRoute: typeof SustainableHousingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  EnergySavingRoute: EnergySavingRoute,
+  HomeSecurityRoute: HomeSecurityRoute,
+  PropertyInvestmentDevelopmentRoute: PropertyInvestmentDevelopmentRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SustainableHousingRoute: SustainableHousingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
