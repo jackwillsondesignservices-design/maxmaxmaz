@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { HeroSlider } from "@/components/site/HeroSlider";
 import { EditorialImage } from "@/components/site/EditorialImage";
 import { Reveal } from "@/components/site/Reveal";
 import { SplitWords } from "@/components/site/SplitWords";
 import { ArrowLink, ClosingCta, SectionLabel } from "@/components/site/Editorial";
-import { heroFrames, images } from "@/lib/images";
+import { heroCaptions, heroFrames, images } from "@/lib/images";
 import { riseDelay } from "@/lib/motion";
 import { site, type NavItem } from "@/lib/site";
 import type { SiteImage } from "@/lib/images";
@@ -52,7 +53,11 @@ function HomePage() {
       <Journal />
       <ClosingCta
         image={images.bluehour}
-        title={<>Let’s look at property <em>differently.</em></>}
+        title={
+          <>
+            Let’s look at property <em>differently.</em>
+          </>
+        }
         copy="Interested in property, home security, energy efficiency or the future of housing? Start a conversation."
       />
     </>
@@ -61,9 +66,12 @@ function HomePage() {
 
 /* ---------------- A. Hero ---------------- */
 function Hero() {
+  const [frame, setFrame] = useState(0);
+  const total = heroFrames.length;
+
   return (
     <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-forest text-on-dark md:min-h-[96svh]">
-      <HeroSlider className="-z-10" />
+      <HeroSlider className="-z-10" onChange={setFrame} />
 
       {/* Editorial metadata — top right on desktop */}
       <div className="pointer-events-none absolute inset-x-0 top-28 hidden md:block">
@@ -77,7 +85,12 @@ function Hero() {
         </div>
       </div>
 
-      <div className="container-editorial relative pb-14 pt-40 md:pb-20">
+      <div className="container-editorial relative pb-10 pt-40 md:pb-14">
+        <div className="mb-7 flex items-center gap-4 rise-in md:mb-9" style={riseDelay(120)}>
+          <span className="h-px w-10 bg-copper rule-draw" style={riseDelay(220)} />
+          <span className="eyebrow text-on-dark">Property, considered differently</span>
+        </div>
+
         <h1 className="display-hero text-luminous">
           <span className="block md:whitespace-nowrap">
             <SplitWords text="A better future," delay={200} step={90} />
@@ -86,22 +99,59 @@ function Hero() {
             <SplitWords text="built around property." delay={470} step={90} />
           </em>
         </h1>
-        <div className="mt-9 flex flex-col gap-10 md:mt-11 md:flex-row md:items-end md:justify-between">
-          <div>
+
+        <div className="mt-8 grid gap-10 md:mt-11 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-7 lg:col-span-6">
             <p className="lede max-w-[33rem] text-on-dark-muted rise-in" style={riseDelay(900)}>
-              Exploring property investment, thoughtful development, smarter home security and practical ways to make
-              housing more efficient.
+              Exploring property investment, thoughtful development, smarter home security and
+              practical ways to make housing more efficient.
             </p>
-            <a href="#approach" className="link-quiet mt-9 text-on-dark rise-in" style={riseDelay(1050)}>
-              Explore the approach <span className="arrow rotate-90" aria-hidden="true">→</span>
-            </a>
+            <div
+              className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-5 rise-in"
+              style={riseDelay(1050)}
+            >
+              <Link to="/contact" className="btn-hero">
+                <span className="relative">Start a conversation</span>
+                <span className="arrow relative" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+              <a href="#approach" className="link-quiet text-on-dark">
+                Explore the approach{" "}
+                <span className="arrow rotate-90" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </div>
           </div>
-          <div className="hidden items-end gap-5 rise-in md:flex" style={riseDelay(1300)} aria-hidden="true">
-            <span className="eyebrow text-on-dark-muted [writing-mode:vertical-rl]">Scroll</span>
-            <span className="scroll-cue" />
+
+          {/* Frame counter + caption, and scroll cue */}
+          <div
+            className="flex items-end justify-between gap-6 border-t border-rule-dark pt-5 rise-in md:col-span-5 md:col-start-8 md:border-t-0 md:pt-0 lg:col-span-4 lg:col-start-9"
+            style={riseDelay(1300)}
+          >
+            <div className="min-w-0 flex-1" aria-hidden="true">
+              <p className="numeral flex items-baseline gap-2 text-on-dark">
+                <span key={frame} className="hero-count text-2xl">
+                  {String(frame + 1).padStart(2, "0")}
+                </span>
+                <span className="text-sm text-on-dark-muted">
+                  / {String(total).padStart(2, "0")}
+                </span>
+              </p>
+              <p
+                key={`c-${frame}`}
+                className="hero-caption eyebrow mt-2 truncate text-on-dark-muted"
+              >
+                {heroCaptions[frame]}
+              </p>
+            </div>
+            <div className="hidden items-end gap-4 md:flex" aria-hidden="true">
+              <span className="eyebrow text-on-dark-muted [writing-mode:vertical-rl]">Scroll</span>
+              <span className="scroll-cue" />
+            </div>
           </div>
         </div>
-        <p className="eyebrow mt-12 text-on-dark-muted md:hidden">Property / Development / Better living</p>
       </div>
     </section>
   );
@@ -115,17 +165,19 @@ function BrandStatement() {
         <div className="grid gap-12 md:grid-cols-12 md:gap-8">
           <Reveal className="md:col-span-7">
             <SectionLabel index="01">The approach</SectionLabel>
-            <h2 className="display-1 mt-10 max-w-[12ch]">Property is more than <em>an address.</em></h2>
+            <h2 className="display-1 mt-10 max-w-[12ch]">
+              Property is more than <em>an address.</em>
+            </h2>
           </Reveal>
           <Reveal delay={150} className="flex items-end md:col-span-4 md:col-start-9">
             <div>
               <p className="lede text-charcoal">
-                It is an asset to understand, a place to protect and a home that can work better for the people who
-                live in it.
+                It is an asset to understand, a place to protect and a home that can work better for
+                the people who live in it.
               </p>
               <p className="body-copy mt-6 text-on-light-muted">
-                Four connected subjects — property, security, energy and sustainable housing — explored with the same
-                careful, practical eye.
+                Four connected subjects — property, security, energy and sustainable housing —
+                explored with the same careful, practical eye.
               </p>
             </div>
           </Reveal>
@@ -141,7 +193,11 @@ function BrandStatement() {
             />
           </Reveal>
           <Reveal delay={150} className="flex flex-col justify-end md:col-span-3 md:col-start-10">
-            <EditorialImage image={images.materials} className="aspect-[4/5]" sizes="(min-width: 768px) 25vw, 60vw" />
+            <EditorialImage
+              image={images.materials}
+              className="aspect-[4/5]"
+              sizes="(min-width: 768px) 25vw, 60vw"
+            />
             <p className="eyebrow mt-4 text-on-light-muted">Material, light, performance</p>
           </Reveal>
         </div>
@@ -154,32 +210,32 @@ function BrandStatement() {
 type Focus = { to: NavItem["to"]; index: string; title: string; copy: string; image: SiteImage };
 
 const property: Focus = {
-    to: "/property-investment-development",
-    index: "I",
-    title: "Property Investment & Development",
-    copy: "Understanding buildings as assets and opportunities — their condition, context and long-term potential.",
-    image: images.docklands,
+  to: "/property-investment-development",
+  index: "I",
+  title: "Property Investment & Development",
+  copy: "Understanding buildings as assets and opportunities — their condition, context and long-term potential.",
+  image: images.docklands,
 };
 const security: Focus = {
-    to: "/home-security",
-    index: "II",
-    title: "Home Security",
-    copy: "Calm, practical thinking about doors, windows, lighting and the products that help protect a home.",
-    image: images.securityDoor,
+  to: "/home-security",
+  index: "II",
+  title: "Home Security",
+  copy: "Calm, practical thinking about doors, windows, lighting and the products that help protect a home.",
+  image: images.securityDoor,
 };
 const energy: Focus = {
-    to: "/energy-saving",
-    index: "III",
-    title: "Energy Saving",
-    copy: "Sensible ways to understand how a home uses energy, and where improvements may be worth exploring.",
-    image: images.energyInterior,
+  to: "/energy-saving",
+  index: "III",
+  title: "Energy Saving",
+  copy: "Sensible ways to understand how a home uses energy, and where improvements may be worth exploring.",
+  image: images.energyInterior,
 };
 const sustainable: Focus = {
-    to: "/sustainable-housing",
-    index: "IV",
-    title: "Sustainable Housing",
-    copy: "Durable, efficient and well-considered homes — new and existing — designed around the people who use them.",
-    image: images.woodlandHouse,
+  to: "/sustainable-housing",
+  index: "IV",
+  title: "Sustainable Housing",
+  copy: "Durable, efficient and well-considered homes — new and existing — designed around the people who use them.",
+  image: images.woodlandHouse,
 };
 
 function FocusTitle({ item, size = "display-3" }: { item: Focus; size?: string }) {
@@ -187,11 +243,16 @@ function FocusTitle({ item, size = "display-3" }: { item: Focus; size?: string }
     <>
       <div className="flex items-baseline gap-4">
         <span className="numeral text-lg text-copper-deep">{item.index}</span>
-        <h3 className={`${size} transition-colors duration-300 group-hover:text-copper-deep`}>{item.title}</h3>
+        <h3 className={`${size} transition-colors duration-300 group-hover:text-copper-deep`}>
+          {item.title}
+        </h3>
       </div>
       <p className="body-copy mt-4 max-w-md text-on-light-muted">{item.copy}</p>
       <span className="link-quiet mt-5">
-        Explore <span className="arrow" aria-hidden="true">→</span>
+        Explore{" "}
+        <span className="arrow" aria-hidden="true">
+          →
+        </span>
       </span>
     </>
   );
@@ -206,7 +267,8 @@ function FocusAreas() {
             <SectionLabel index="02">Four areas of focus</SectionLabel>
           </div>
           <p className="lede md:col-span-5 md:col-start-8">
-            One coherent subject seen from four angles: how we invest in, protect, run and build the places we live.
+            One coherent subject seen from four angles: how we invest in, protect, run and build the
+            places we live.
           </p>
         </Reveal>
 
@@ -264,10 +326,15 @@ function FocusAreas() {
             <div className="flex flex-col justify-between gap-10 p-8 md:col-span-6 md:p-14 lg:p-20">
               <span className="numeral text-lg text-copper">{sustainable.index}</span>
               <div>
-                <h3 className="display-2 transition-colors duration-300 group-hover:text-copper">{sustainable.title}</h3>
+                <h3 className="display-2 transition-colors duration-300 group-hover:text-copper">
+                  {sustainable.title}
+                </h3>
                 <p className="body-copy mt-5 max-w-md text-on-dark-muted">{sustainable.copy}</p>
                 <span className="link-quiet mt-6 text-on-dark">
-                  Explore <span className="arrow" aria-hidden="true">→</span>
+                  Explore{" "}
+                  <span className="arrow" aria-hidden="true">
+                    →
+                  </span>
                 </span>
               </div>
             </div>
@@ -302,12 +369,15 @@ function PropertySection() {
             <SectionLabel index="03" tone="dark">
               Property & development
             </SectionLabel>
-            <h2 className="display-1 mt-10 max-w-[10ch]">Look beyond <em>the building.</em></h2>
+            <h2 className="display-1 mt-10 max-w-[10ch]">
+              Look beyond <em>the building.</em>
+            </h2>
           </Reveal>
           <Reveal delay={150}>
             <p className="lede mt-8 max-w-md text-on-dark-muted">
-              Explore the thinking behind property investment and development, from understanding the potential of a
-              building to considering how spaces can serve people and communities over time.
+              Explore the thinking behind property investment and development, from understanding
+              the potential of a building to considering how spaces can serve people and communities
+              over time.
             </p>
             <ArrowLink to="/property-investment-development" className="mt-10 text-on-dark">
               Property investment & development
@@ -327,10 +397,13 @@ function SecuritySection() {
         <Reveal className="order-2 flex flex-col justify-between md:order-1 md:col-span-5">
           <SectionLabel index="04">Home security</SectionLabel>
           <div className="mt-10 md:mt-0">
-            <h2 className="display-1 max-w-[11ch]">Feel at home <em>in your home.</em></h2>
+            <h2 className="display-1 max-w-[11ch]">
+              Feel at home <em>in your home.</em>
+            </h2>
             <p className="lede mt-8 max-w-md text-on-light-muted">
-              Discover practical considerations for residential security, including the products, features and everyday
-              measures that can help people make more informed choices about protecting their homes.
+              Discover practical considerations for residential security, including the products,
+              features and everyday measures that can help people make more informed choices about
+              protecting their homes.
             </p>
             <ArrowLink to="/home-security" className="mt-10">
               Home security
@@ -346,7 +419,11 @@ function SecuritySection() {
               parallax={5}
             />
             <div className="col-span-2 flex flex-col justify-end gap-4 md:gap-6">
-              <EditorialImage image={images.smartLock} className="aspect-square" sizes="(min-width: 768px) 20vw, 40vw" />
+              <EditorialImage
+                image={images.smartLock}
+                className="aspect-square"
+                sizes="(min-width: 768px) 20vw, 40vw"
+              />
               <p className="eyebrow text-on-light-muted">Entrances, access & light</p>
             </div>
           </div>
@@ -365,10 +442,12 @@ function EnergySection() {
           <SectionLabel index="05" tone="dark">
             Energy saving
           </SectionLabel>
-          <h2 className="display-1 mt-10 max-w-[11ch]">Make every home <em>work smarter.</em></h2>
+          <h2 className="display-1 mt-10 max-w-[11ch]">
+            Make every home <em>work smarter.</em>
+          </h2>
           <p className="lede mt-8 max-w-md text-on-dark-muted">
-            Explore practical ways to think about energy use at home, from heating and lighting to insulation and
-            everyday efficiency.
+            Explore practical ways to think about energy use at home, from heating and lighting to
+            insulation and everyday efficiency.
           </p>
           <ArrowLink to="/energy-saving" className="mt-10 text-on-dark">
             Energy saving
@@ -393,12 +472,14 @@ function SustainableSection() {
         <div className="grid gap-10 md:grid-cols-12">
           <Reveal className="md:col-span-6">
             <SectionLabel index="06">Sustainable housing</SectionLabel>
-            <h2 className="display-1 mt-10 max-w-[10ch]">Better homes. <em>Better choices.</em></h2>
+            <h2 className="display-1 mt-10 max-w-[10ch]">
+              Better homes. <em>Better choices.</em>
+            </h2>
           </Reveal>
           <Reveal delay={150} className="flex flex-col justify-end md:col-span-4 md:col-start-9">
             <p className="lede text-on-light-muted">
-              Discover the ideas and practical considerations shaping more efficient, durable and thoughtfully designed
-              housing.
+              Discover the ideas and practical considerations shaping more efficient, durable and
+              thoughtfully designed housing.
             </p>
             <ArrowLink to="/sustainable-housing" className="mt-8 self-start">
               Sustainable housing
@@ -419,14 +500,21 @@ function SustainableSection() {
 }
 
 /* ---------------- H. Journal ---------------- */
-type JournalItem = { title: string; topic: string; to: NavItem["to"]; image: SiteImage; excerpt: string };
+type JournalItem = {
+  title: string;
+  topic: string;
+  to: NavItem["to"];
+  image: SiteImage;
+  excerpt: string;
+};
 
 const lead: JournalItem = {
-    title: "Small Changes That Can Improve Home Energy Efficiency",
-    topic: "Energy",
-    to: "/energy-saving",
-    image: images.insulation,
-    excerpt: "Draughts, controls, lighting and habits — modest places to start before larger projects.",
+  title: "Small Changes That Can Improve Home Energy Efficiency",
+  topic: "Energy",
+  to: "/energy-saving",
+  image: images.insulation,
+  excerpt:
+    "Draughts, controls, lighting and habits — modest places to start before larger projects.",
 };
 
 const rest: JournalItem[] = [
@@ -435,14 +523,16 @@ const rest: JournalItem[] = [
     topic: "Property",
     to: "/property-investment-development",
     image: images.londonBrick,
-    excerpt: "Location, condition, constraints and use — the questions that shape a considered view.",
+    excerpt:
+      "Location, condition, constraints and use — the questions that shape a considered view.",
   },
   {
     title: "A Practical Introduction to Sustainable Housing",
     topic: "Housing",
     to: "/sustainable-housing",
     image: images.timberBlackHouse,
-    excerpt: "What sustainability means for a home beyond appearance: performance, durability and fit.",
+    excerpt:
+      "What sustainability means for a home beyond appearance: performance, durability and fit.",
   },
 ];
 
@@ -453,20 +543,29 @@ function Journal() {
         <Reveal className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div>
             <SectionLabel index="07">Journal — forthcoming</SectionLabel>
-            <h2 className="display-1 mt-10 max-w-[13ch]">Ideas for a <em>better-built future.</em></h2>
+            <h2 className="display-1 mt-10 max-w-[13ch]">
+              Ideas for a <em>better-built future.</em>
+            </h2>
           </div>
           <p className="body-copy max-w-sm text-on-light-muted">
-            Planned article concepts. Full articles are in preparation — in the meantime, each links to the related
-            guide on this site.
+            Planned article concepts. Full articles are in preparation — in the meantime, each links
+            to the related guide on this site.
           </p>
         </Reveal>
 
         <div className="mt-16 grid gap-14 md:mt-20 md:grid-cols-12 md:gap-8">
           <Reveal className="md:col-span-7">
             <Link to={lead.to} className="group block">
-              <EditorialImage image={lead.image} className="aspect-[3/2]" sizes="(min-width: 768px) 58vw, 100vw" zoom />
+              <EditorialImage
+                image={lead.image}
+                className="aspect-[3/2]"
+                sizes="(min-width: 768px) 58vw, 100vw"
+                zoom
+              />
               <JournalMeta topic={lead.topic} />
-              <h3 className="display-2 mt-4 max-w-[18ch] transition-colors group-hover:text-copper-deep">{lead.title}</h3>
+              <h3 className="display-2 mt-4 max-w-[18ch] transition-colors group-hover:text-copper-deep">
+                {lead.title}
+              </h3>
               <p className="body-copy mt-4 max-w-lg text-on-light-muted">{lead.excerpt}</p>
             </Link>
           </Reveal>
@@ -481,7 +580,9 @@ function Journal() {
                     zoom
                   />
                   <JournalMeta topic={a.topic} />
-                  <h3 className="display-3 mt-3 transition-colors group-hover:text-copper-deep">{a.title}</h3>
+                  <h3 className="display-3 mt-3 transition-colors group-hover:text-copper-deep">
+                    {a.title}
+                  </h3>
                   <p className="body-copy mt-3 text-on-light-muted">{a.excerpt}</p>
                 </Link>
               </Reveal>

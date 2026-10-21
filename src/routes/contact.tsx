@@ -31,7 +31,12 @@ function ContactPage() {
       <div className="grid min-h-[100svh] lg:grid-cols-12">
         {/* Image column */}
         <div className="relative isolate flex min-h-[62svh] items-end overflow-hidden bg-forest text-on-dark lg:col-span-5 lg:min-h-0">
-          <EditorialImage image={images.retrofit} className="absolute inset-0 -z-20" sizes="(min-width: 1024px) 42vw, 100vw" priority />
+          <EditorialImage
+            image={images.retrofit}
+            className="absolute inset-0 -z-20"
+            sizes="(min-width: 1024px) 42vw, 100vw"
+            priority
+          />
           <div className="absolute inset-0 -z-10 scrim-bottom" />
           <div className="w-full px-[clamp(1.25rem,4vw,4rem)] pb-12 pt-36 lg:pb-16">
             <div className="mb-8 flex items-center gap-4 rise-in" style={riseDelay(100)}>
@@ -45,7 +50,8 @@ function ContactPage() {
               </em>
             </h1>
             <p className="lede mt-6 max-w-md text-on-dark-muted rise-in" style={riseDelay(360)}>
-              Have a question about property, home security, energy saving or sustainable housing? Get in touch.
+              Have a question about property, home security, energy saving or sustainable housing?
+              Get in touch.
             </p>
           </div>
         </div>
@@ -55,7 +61,8 @@ function ContactPage() {
           <div className="w-full max-w-2xl lg:mx-auto">
             <SectionLabel>Send an enquiry</SectionLabel>
             <p className="body-copy mt-6 max-w-lg text-on-light-muted">
-              Share a little about your question and the best way to reach you. Enquiries are stored securely and read by the site owner.
+              Share a little about your question and the best way to reach you. Enquiries are stored
+              securely and read by the site owner.
             </p>
             <div className="mt-12">
               <ContactForm />

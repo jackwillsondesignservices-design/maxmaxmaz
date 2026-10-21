@@ -21,10 +21,16 @@ export function SectionLabel({
   return (
     <div className={cn("flex items-center gap-4", className)}>
       {index && (
-        <span className={cn("numeral text-sm", tone === "light" ? "text-copper-deep" : "text-copper")}>{index}</span>
+        <span
+          className={cn("numeral text-sm", tone === "light" ? "text-copper-deep" : "text-copper")}
+        >
+          {index}
+        </span>
       )}
       <span className="h-px w-10 bg-copper" aria-hidden="true" />
-      <span className={cn("eyebrow", tone === "light" ? "text-on-light-muted" : "text-on-dark-muted")}>
+      <span
+        className={cn("eyebrow", tone === "light" ? "text-on-light-muted" : "text-on-dark-muted")}
+      >
         {children}
       </span>
     </div>
@@ -67,13 +73,26 @@ export function RelatedPages({
         <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-8 lg:gap-14">
           {items.map((item, i) => (
             <Reveal key={item.to} delay={i * 120}>
-              <Link to={item.to} className="group grid grid-cols-[38%_1fr] items-end gap-6 md:gap-8">
-                <EditorialImage image={item.image} className="aspect-[4/5]" sizes="(min-width: 768px) 20vw, 40vw" zoom />
+              <Link
+                to={item.to}
+                className="group grid grid-cols-[38%_1fr] items-end gap-6 md:gap-8"
+              >
+                <EditorialImage
+                  image={item.image}
+                  className="aspect-[4/5]"
+                  sizes="(min-width: 768px) 20vw, 40vw"
+                  zoom
+                />
                 <div className="pb-1">
-                  <h3 className="display-3 transition-colors duration-300 group-hover:text-copper-deep">{item.label}</h3>
+                  <h3 className="display-3 transition-colors duration-300 group-hover:text-copper-deep">
+                    {item.label}
+                  </h3>
                   <p className="body-copy mt-3 text-on-light-muted">{item.description}</p>
                   <span className="link-quiet mt-4">
-                    Explore <span className="arrow" aria-hidden="true">→</span>
+                    Explore{" "}
+                    <span className="arrow" aria-hidden="true">
+                      →
+                    </span>
                   </span>
                 </div>
               </Link>
@@ -142,7 +161,15 @@ export function EnquiryBand({ title, copy }: { title: ReactNode; copy: ReactNode
 }
 
 /** Outbound reference link to verified external guidance. */
-export function SourceLink({ href, title, publisher }: { href: string; title: string; publisher: string }) {
+export function SourceLink({
+  href,
+  title,
+  publisher,
+}: {
+  href: string;
+  title: string;
+  publisher: string;
+}) {
   return (
     <a
       href={href}
@@ -154,7 +181,10 @@ export function SourceLink({ href, title, publisher }: { href: string; title: st
         <span className="eyebrow block text-on-light-muted">{publisher}</span>
         <span className="mt-1 block font-display text-xl md:text-2xl">{title}</span>
       </span>
-      <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-300 group-hover:translate-x-1"
+      >
         ↗
       </span>
       <span className="sr-only">(opens in a new tab)</span>

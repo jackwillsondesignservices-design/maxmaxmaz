@@ -29,10 +29,30 @@ const intro =
   "This website brings together four closely connected areas of interest: property, residential security, energy efficiency and sustainable housing. The aim is to make useful information easier to explore and encourage more considered decisions about the places we live and invest in.";
 
 const themes: { to: NavItem["to"]; longLabel: string; note: string; image: SiteImage }[] = [
-  { to: "/property-investment-development", longLabel: "Property Investment & Development", note: "Buildings as assets and opportunities, seen in context.", image: images.docklands },
-  { to: "/home-security", longLabel: "Home Security", note: "Calm, practical approaches to protecting a home.", image: images.securityDoor },
-  { to: "/energy-saving", longLabel: "Energy Saving", note: "Understanding how homes use energy, and where to improve.", image: images.energyExterior },
-  { to: "/sustainable-housing", longLabel: "Sustainable Housing", note: "Durable, efficient homes designed around people.", image: images.woodlandHouse },
+  {
+    to: "/property-investment-development",
+    longLabel: "Property Investment & Development",
+    note: "Buildings as assets and opportunities, seen in context.",
+    image: images.docklands,
+  },
+  {
+    to: "/home-security",
+    longLabel: "Home Security",
+    note: "Calm, practical approaches to protecting a home.",
+    image: images.securityDoor,
+  },
+  {
+    to: "/energy-saving",
+    longLabel: "Energy Saving",
+    note: "Understanding how homes use energy, and where to improve.",
+    image: images.energyExterior,
+  },
+  {
+    to: "/sustainable-housing",
+    longLabel: "Sustainable Housing",
+    note: "Durable, efficient homes designed around people.",
+    image: images.woodlandHouse,
+  },
 ];
 
 function AboutPage() {
@@ -66,7 +86,9 @@ function AboutPage() {
               <Reveal as="li" key={t.to} delay={i * 80} className="border-b border-rule-light">
                 <Link to={t.to} className="group grid items-center gap-6 py-8 md:grid-cols-12">
                   <span className="numeral text-lg text-copper-deep md:col-span-1">0{i + 1}</span>
-                  <h3 className="display-3 transition-colors group-hover:text-copper-deep md:col-span-5">{t.longLabel}</h3>
+                  <h3 className="display-3 transition-colors group-hover:text-copper-deep md:col-span-5">
+                    {t.longLabel}
+                  </h3>
                   <p className="body-copy text-on-light-muted md:col-span-4">{t.note}</p>
                   <div className="hidden md:col-span-2 md:block">
                     <EditorialImage image={t.image} className="aspect-[4/3]" sizes="15vw" zoom />
@@ -81,15 +103,26 @@ function AboutPage() {
       <section className="bg-limestone">
         <div className="container-editorial grid gap-12 py-24 md:grid-cols-12 md:py-32">
           <Reveal className="md:col-span-6">
-            <EditorialImage image={images.materials} className="aspect-[4/5] md:max-w-md" sizes="(min-width: 768px) 40vw, 100vw" parallax={4} />
+            <EditorialImage
+              image={images.materials}
+              className="aspect-[4/5] md:max-w-md"
+              sizes="(min-width: 768px) 40vw, 100vw"
+              parallax={4}
+            />
           </Reveal>
           <Reveal delay={150} className="flex flex-col justify-center md:col-span-5 md:col-start-8">
             <SectionLabel index="03">Principles</SectionLabel>
             <ul className="mt-10 space-y-8">
               {[
-                ["Clarity over hype", "Information is kept general, accurate and free of exaggerated claims."],
+                [
+                  "Clarity over hype",
+                  "Information is kept general, accurate and free of exaggerated claims.",
+                ],
                 ["Practical first", "Ideas are framed around real homes and everyday decisions."],
-                ["Professional where it matters", "Where work or advice needs a qualified professional, that is made clear."],
+                [
+                  "Professional where it matters",
+                  "Where work or advice needs a qualified professional, that is made clear.",
+                ],
               ].map(([h, b]) => (
                 <li key={h}>
                   <h3 className="font-display text-2xl">{h}</h3>

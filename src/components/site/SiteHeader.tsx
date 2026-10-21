@@ -169,7 +169,9 @@ export function SiteHeader() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 text-on-dark [view-transition-name:site-header] transition-[background-color,box-shadow,padding,translate] duration-700 ease-[var(--ease-cinematic)]",
-          solid ? "bg-forest/90 py-3 shadow-[0_1px_0_var(--rule-dark)] backdrop-blur-xl" : "bg-transparent py-5 md:py-7",
+          solid
+            ? "bg-forest/90 py-3 shadow-[0_1px_0_var(--rule-dark)] backdrop-blur-xl"
+            : "bg-transparent py-5 md:py-7",
           tucked && "-translate-y-full",
         )}
       >

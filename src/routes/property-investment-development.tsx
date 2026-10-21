@@ -73,13 +73,13 @@ function PropertyPage() {
           </Reveal>
           <Reveal delay={150} className="space-y-6 md:col-span-6 md:col-start-7 md:pt-24">
             <p className="lede">
-              Looking carefully at a property means considering its condition, its location, how it is intended to be
-              used and the constraints that may affect it.
+              Looking carefully at a property means considering its condition, its location, how it
+              is intended to be used and the constraints that may affect it.
             </p>
             <p className="body-copy text-on-light-muted">
-              These are general considerations to help frame a more informed conversation. They are not a valuation,
-              survey or investment advice — every property decision depends on individual circumstances and benefits
-              from independent, qualified professional input.
+              These are general considerations to help frame a more informed conversation. They are
+              not a valuation, survey or investment advice — every property decision depends on
+              individual circumstances and benefits from independent, qualified professional input.
             </p>
           </Reveal>
         </div>
@@ -98,12 +98,12 @@ function PropertyPage() {
             <SectionLabel index="02">A development perspective</SectionLabel>
             <h2 className="display-2 mt-10 max-w-[12ch]">Design that lasts beyond the handover.</h2>
             <p className="body-copy mt-8 text-on-light-muted">
-              Good design, everyday functionality, energy performance and long-term suitability all influence how people
-              experience a building — and how they think about it as an asset.
+              Good design, everyday functionality, energy performance and long-term suitability all
+              influence how people experience a building — and how they think about it as an asset.
             </p>
             <p className="body-copy mt-5 text-on-light-muted">
-              A development perspective asks not only what a space is today, but how well it could serve its occupants,
-              neighbours and wider community for decades to come.
+              A development perspective asks not only what a space is today, but how well it could
+              serve its occupants, neighbours and wider community for decades to come.
             </p>
           </Reveal>
         </div>
@@ -117,14 +117,18 @@ function PropertyPage() {
               <SectionLabel index="03">What to consider</SectionLabel>
               <h2 className="display-2 mt-10 max-w-[10ch]">Six questions worth asking.</h2>
               <div className="mt-10 hidden md:block">
-                <EditorialImage image={images.propertyModel} className="aspect-[4/3]" sizes="30vw" />
+                <EditorialImage
+                  image={images.propertyModel}
+                  className="aspect-[4/3]"
+                  sizes="30vw"
+                />
               </div>
             </Reveal>
             <div className="md:col-span-7 md:col-start-6">
               <ConsiderationList />
               <p className="mt-10 border-l-2 border-copper pl-5 text-sm text-on-light-muted">
-                General information only. Property decisions require individual assessment and, where relevant, advice
-                from qualified and appropriately regulated professionals.
+                General information only. Property decisions require individual assessment and,
+                where relevant, advice from qualified and appropriately regulated professionals.
               </p>
             </div>
           </div>
@@ -136,7 +140,9 @@ function PropertyPage() {
         <div className="container-editorial grid gap-10 md:grid-cols-12">
           <Reveal className="md:col-span-4">
             <SectionLabel>Further reading</SectionLabel>
-            <p className="body-copy mt-6 max-w-xs text-on-light-muted">Independent, official sources for UK property.</p>
+            <p className="body-copy mt-6 max-w-xs text-on-light-muted">
+              Independent, official sources for UK property.
+            </p>
           </Reveal>
           <Reveal delay={120} className="md:col-span-7 md:col-start-6">
             <SourceLink
@@ -144,13 +150,21 @@ function PropertyPage() {
               title="Planning permission in England and Wales"
               href="https://www.gov.uk/planning-permission-england-wales"
             />
-            <SourceLink publisher="GOV.UK" title="Buying or selling your home" href="https://www.gov.uk/buy-sell-your-home" />
+            <SourceLink
+              publisher="GOV.UK"
+              title="Buying or selling your home"
+              href="https://www.gov.uk/buy-sell-your-home"
+            />
             <SourceLink
               publisher="GOV.UK"
               title="Find an energy certificate"
               href="https://www.gov.uk/find-energy-certificate"
             />
-            <SourceLink publisher="RICS" title="Royal Institution of Chartered Surveyors" href="https://www.rics.org/" />
+            <SourceLink
+              publisher="RICS"
+              title="Royal Institution of Chartered Surveyors"
+              href="https://www.rics.org/"
+            />
           </Reveal>
         </div>
       </section>
@@ -165,7 +179,8 @@ function PropertyPage() {
           {
             to: "/sustainable-housing",
             label: "Sustainable Housing",
-            description: "Durability, materials and performance across the whole life of a building.",
+            description:
+              "Durability, materials and performance across the whole life of a building.",
             image: images.landscape,
           },
           {
@@ -220,7 +235,9 @@ function ConsiderationList() {
               )}
             >
               <div className="overflow-hidden">
-                <p className="body-copy max-w-xl pb-8 pl-14 text-on-light-muted md:pl-[4.5rem]">{c.body}</p>
+                <p className="body-copy max-w-xl pb-8 pl-14 text-on-light-muted md:pl-[4.5rem]">
+                  {c.body}
+                </p>
               </div>
             </div>
           </li>
