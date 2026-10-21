@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { SiteImage } from "@/lib/images";
 
@@ -14,8 +14,9 @@ type EditorialImageProps = {
 };
 
 /**
- * Image with a reserved aspect box (set by the parent's sizing), lazy loading,
- * per-image focal position and optional gentle parallax.
+ * Image with a reserved box (set by the parent's sizing). While loading it shows the
+ * photograph's own colour and a blurred preview, then the full image fades in sharp.
+ * On first sight the frame opens out from a slight inset (cinematic reveal).
  */
 export function EditorialImage({
   image,
@@ -28,6 +29,35 @@ export function EditorialImage({
 }: EditorialImageProps) {
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  const [inView, setInView] = useState(priority);
+
+  // Catch images that finished loading before hydration.
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img?.complete && img.naturalWidth > 0) setLoaded(true);
+  }, []);
+
+  // Open the frame the first time it enters the viewport.
+  useEffect(() => {
+    if (inView) return;
+    const wrap = wrapRef.current;
+    if (!wrap || typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.04 },
+    );
+    io.observe(wrap);
+    return () => io.disconnect();
+  }, [inView]);
 
   useEffect(() => {
     if (!parallax) return;
@@ -58,8 +88,23 @@ export function EditorialImage({
     };
   }, [parallax]);
 
+  const position = image.position ?? "50% 50%";
+
   return (
-    <div ref={wrapRef} className={cn("relative overflow-hidden bg-mineral", zoom && "img-zoom", className)}>
+    <div
+      ref={wrapRef}
+      data-loaded={loaded}
+      data-inview={inView}
+      className={cn("ei relative overflow-hidden bg-pine", zoom && "img-zoom", className)}
+      style={image.tone ? { backgroundColor: image.tone } : undefined}
+    >
+      {image.lqip && (
+        <span
+          aria-hidden="true"
+          className="ei-lqip"
+          style={{ backgroundImage: `url("${image.lqip}")`, backgroundPosition: position }}
+        />
+      )}
       <img
         ref={imgRef}
         src={image.src}
@@ -71,8 +116,11 @@ export function EditorialImage({
         loading={priority ? "eager" : "lazy"}
         decoding="async"
         fetchPriority={priority ? "high" : undefined}
-        className={cn("img-cover", parallax ? "scale-[1.12]" : "", imgClassName)}
-        style={{ objectPosition: image.position ?? "50% 50%" }}
+        onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
+        data-parallax={parallax ? "" : undefined}
+        className={cn("img-cover ei-img", parallax ? "scale-[1.12]" : "", imgClassName)}
+        style={{ objectPosition: position }}
       />
     </div>
   );
